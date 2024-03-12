@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: gateway-service
+  rabbitmq:
+      host: localhost
+      port: 5672
+      username: guest
+      password: guest
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          jwk-set-uri: http://localhost:8080/realms/master/protocol/openid-connect/certs
+        #issuer-uri: http://localhost:8080/auth/realms/spring-boot-microservices-realm
+
+
+  config:
+    import: configserver:http://localhost:8888
+  profiles:
+    active: rout
+
+jwt:
+  secret: BvPHGM8C0ia4uOuxxqPD5DTbWC9F9TWvPStp3pb7ARo0oK2mJ3pd3YG4lxA9i8bj6OTbadwezxgeEByY
+  auth:
+    converter:
+      resource-id: x
+
+
+server:
+  port: 8765
+
+
+
+
+
+

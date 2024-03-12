@@ -1,0 +1,28 @@
+spring:
+  application:
+   name: customer-service
+  config:
+    import: configserver:http://localhost:8888
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/customer-service
+    username: postgres
+    password: qwerty
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: true
+
+  mvc:
+    hidden-method:
+      filter:
+        enabled: true
+
+server:
+  error:
+    include-message: always
+  port: 0
+
+
+

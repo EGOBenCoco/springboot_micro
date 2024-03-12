@@ -1,0 +1,19 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/EGOBenCoco/booking_config.git
+          clone-on-start: true
+          basedir: file://c:/desktop/git-c
+          username: EGOBenCoco
+          password: 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
+        default-label: main
+logging:
+  pattern:
+    console: "%C{1.} [%-5level] %d{HH:mm:ss} - %msg%n"
+
