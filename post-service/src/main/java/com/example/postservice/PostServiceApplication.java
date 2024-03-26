@@ -1,6 +1,9 @@
 package com.example.postservice;
 
+import com.example.postservice.config.OAuth2FeignRequestInterceptor;
 import org.modelmapper.ModelMapper;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -24,5 +27,10 @@ public class PostServiceApplication {
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
+    }
+
+    @Bean
+    public OAuth2FeignRequestInterceptor oAuth2FeignRequestInterceptor() {
+        return new OAuth2FeignRequestInterceptor();
     }
 }

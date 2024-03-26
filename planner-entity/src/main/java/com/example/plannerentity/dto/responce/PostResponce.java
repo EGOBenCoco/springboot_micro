@@ -10,4 +10,5 @@ public class PostResponce {
     String name;
     String content;
     Category category;
+    String nickname;
 }

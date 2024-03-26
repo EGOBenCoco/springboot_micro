@@ -8,7 +8,6 @@ import com.example.postservice.service.PostService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -29,19 +28,6 @@ public class PostController {
         return ResponseEntity.ok(postService.getById(id));
 
     }
-    @GetMapping("/admin")
-    public ResponseEntity<String> getAdmin(Principal principal) {
-        JwtAuthenticationToken token = (JwtAuthenticationToken) principal;
-        String userName = (String) token.getTokenAttributes().get("name");
-        String userEmail = (String) token.getTokenAttributes().get("email");
-        return ResponseEntity.ok("Hello Admin \nUser Name : " + userName + "\nUser Email : " + userEmail);
-    }
-
-    @GetMapping("/username/{username}")
-    public ResponseEntity<UserRepresentation> searchByUsername(@PathVariable String username) {
-        return ResponseEntity.ok().body(postService.searchByUsername(username));
-    }
-
     @GetMapping("/all")
     public ResponseEntity<Page<PostResponce>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
                                                       @RequestParam(name = "size", defaultValue = "10") int size){
@@ -49,8 +35,17 @@ public class PostController {
     }
 
     @GetMapping("/{nickname}/consumer")
-    public ResponseEntity<Post> getByConsumerId(@PathVariable String nickname){
-        return ResponseEntity.ok(postService.getByConsumerId(nickname));
+    public ResponseEntity<Page<PostResponce>> getByConsumerId(@PathVariable String nickname,
+                                                      @RequestParam(name = "page", defaultValue = "0") int page,
+                                                      @RequestParam(name = "size", defaultValue = "10") int size){
+        return ResponseEntity.ok(postService.getByNickname(nickname,page,size));
+    }
+
+    @GetMapping("/{accountId}/consumer")
+    public ResponseEntity<Page<PostResponce>> getByAccountId(@PathVariable int accountId,
+                                                      @RequestParam(name = "page", defaultValue = "0") int page,
+                                                      @RequestParam(name = "size", defaultValue = "10") int size){
+        return ResponseEntity.ok(postService.getByAccountId(accountId,page,size));
     }
 
     @PutMapping("/{id}")
@@ -60,8 +55,8 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<String> create(@RequestBody Post post, Principal principal){
-        postService.createPost(post,principal);
+    public ResponseEntity<String> create(@RequestBody Post post){
+        postService.createPost(post);
         return ResponseEntity.ok("Create Post");
     }
 

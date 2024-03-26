@@ -26,12 +26,10 @@ public class SecurityConfig {
         http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchange ->
-                        exchange.pathMatchers("/customers/test")
-                                .permitAll()
-                                .pathMatchers("/customers/test/two").hasRole("ACCOUNTS")
-                                .pathMatchers("/posts").permitAll()
+                        exchange
+                               // .pathMatchers("/customers/test/two").permitAll()
                                 .anyExchange()
-                                .permitAll())
+                                .authenticated())
                 .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec.jwt(jwtSpec ->
                         jwtSpec.jwtAuthenticationConverter(grantedAuthoritiesExtract())));
         return http.build();

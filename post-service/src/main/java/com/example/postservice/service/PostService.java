@@ -2,26 +2,25 @@ package com.example.postservice.service;
 
 import com.example.plannerentity.dto.request.PostUpdateRequest;
 import com.example.plannerentity.dto.responce.PostResponce;
+import com.example.plannerentity.dto.responce.PostSubscriberMessage;
+import com.example.plannerentity.dto.responce.ProfileResponce;
 import com.example.plannerentity.enums.Category;
-import com.example.postservice.client.CustomerClient;
+import com.example.plannerentity.global_exception.CustomException;
+import com.example.postservice.client.ProfileClient;
 import com.example.postservice.model.Post;
-import com.example.postservice.producer.ProducerPost;
+import com.example.postservice.producer.PostProducer;
 import com.example.postservice.repository.PostRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.keycloak.admin.client.Keycloak;
-import org.keycloak.representations.idm.UserRepresentation;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
-import java.security.Principal;
-import java.util.List;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
@@ -29,57 +28,59 @@ import java.util.List;
 public class PostService {
 
     PostRepository postRepository;
-    CustomerClient customerClient;
-    ProducerPost producerPost;
+    ProfileClient profileClient;
     ModelMapper modelMapper;
-
-    Keycloak keycloak;
-
-
-    public UserRepresentation searchByUsername(String username){
-        List<UserRepresentation> userRepresentations = keycloak.realm("master").users()
-                .search(username, true);
-        return userRepresentations.get(0);
-    }
+    PostProducer postProducer;
     public Page<PostResponce> findAll(int page, int size ){
         Page<Post> postPage = postRepository.findAllPost(PageRequest.of(page,size));
+        if(postPage.isEmpty()){
+            throw new CustomException("Posts not found", HttpStatus.NOT_FOUND);
+        }
         Type postResponceListType = new TypeToken<Page<PostResponce>>() {}.getType();
         return modelMapper.map(postPage,postResponceListType);
+    }
 
+    public Page<PostResponce> getByNickname(String nickname,int page,int size){
+        Page<Post> postPage = postRepository.findByNickname(nickname, PageRequest.of(page,size));
+        if(postPage.isEmpty()){
+            throw new CustomException("Posts not found", HttpStatus.NOT_FOUND);
+        }
+        Type postResponceListType = new TypeToken<Page<PostResponce>>() {}.getType();
+        return modelMapper.map(postPage,postResponceListType);
     }
-    public Post getByConsumerId(String nickname){
-        return postRepository.findByNickname(nickname);
+    public Page<PostResponce> getByAccountId(int accountId,int page,int size){
+        Page<Post> postPage = postRepository.findAllByAccountId(accountId, PageRequest.of(page,size));
+        if(postPage.isEmpty()){
+            throw new CustomException("Posts not found", HttpStatus.NOT_FOUND);
+        }
+        Type postResponceListType = new TypeToken<Page<PostResponce>>() {}.getType();
+        return modelMapper.map(postPage,postResponceListType);
     }
+
     public Post getById(int id) {
-        return postRepository.findById(id).orElseThrow();
+        return postRepository.findById(id).orElseThrow(()-> new CustomException("Post not found", HttpStatus.NOT_FOUND));
     }
+
     public Page<PostResponce> findByCategory(Category category, int page, int size){
         Page<Post> postPage = postRepository.findByCategory(category, PageRequest.of(page,size));
+        if(postPage.isEmpty()){
+            throw new CustomException("Posts not found", HttpStatus.NOT_FOUND);
+        }
         Type postResponceListType = new TypeToken<Page<PostResponce>>() {}.getType();
         return modelMapper.map(postPage,postResponceListType);
     }
-    public void createPost(Post post, Principal principal){
-        JwtAuthenticationToken token = (JwtAuthenticationToken) principal;
-        String userName = (String) token.getTokenAttributes().get("name");
-
-        post.setNickname(userName);
+    public void createPost(Post post) {
+        ProfileResponce profile = profileClient.getById(post.getAccountId());
+        post.setAccountId(profile.getId());
+        post.setNickname(profile.getNickname());
         postRepository.save(post);
-   /*     UserRepresentation users =(UserRepresentation) keycloak.realm("master").users()
-                .search(post.getNickname(), true);
-        post.setNickname(users.toString());
-        postRepository.save(post);*/
-
-
-/*        CustomerResponce customer = customerClient.getById(post.getCustomerId());
-        post.setCustomerId(customer.getId());
-        post.setNickname(customer.getNickname());
-        postRepository.save(post);
-        producerPost.publishEmailMessage(customer);*/
-
-
-
-
+        PostSubscriberMessage message = new PostSubscriberMessage();
+        message.setProfileId(profile.getId());
+        message.setPostTitle(post.getName());
+        message.setAuthorName(post.getNickname());
+        postProducer.sendPostDataToRabbitMQ(message);
     }
+
     public void updatePost(int postId, PostUpdateRequest updateRequest){
         postRepository.findById(postId).ifPresentOrElse(post ->
         {
@@ -88,9 +89,10 @@ public class PostService {
             post.setCategory(updateRequest.getCategory());
             postRepository.save(post);
         }, () -> {
-            //throw new CustomException("Consumer not found",HttpStatus.NOT_FOUND);
+            throw new CustomException("Post not found",HttpStatus.NOT_FOUND);
         });
     }
+
 
     public void deleteById(int id){
         postRepository.deleteById(id);

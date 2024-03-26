@@ -10,7 +10,7 @@ spring:
     oauth2:
       resource-server:
         jwt:
-          jwk-set-uri: http://localhost:8080/realms/master/protocol/openid-connect/certs
+          jwk-set-uri: http://localhost:8080/realms/test/protocol/openid-connect/certs
         #issuer-uri: http://localhost:8080/auth/realms/spring-boot-microservices-realm
 
 
@@ -29,7 +29,19 @@ jwt:
 server:
   port: 8765
 
-
+resilience4j:
+  circuit-breaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
+        permittedNumberOfCallsInHalfOpenState: 3
+        failureRateThreshold: 50.0
+        waitDurationInOpenState: 5s
+        slowCallDurationThreshold: 200ms
+        slowCallRateThreshold: 50.0
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        minimumNumberOfCalls: 5
 
 
 

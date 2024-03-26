@@ -11,7 +11,7 @@ spring:
           clone-on-start: true
           basedir: file://c:/desktop/git-c
           username: EGOBenCoco
-          password: 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
+          password: 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
         default-label: main
 logging:
   pattern:
