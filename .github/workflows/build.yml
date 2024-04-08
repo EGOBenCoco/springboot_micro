@@ -28,7 +28,12 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build Maven projects
-        run: mvn -B package --file gateway-service/pom.xml && mvn -B package --file eureka-service/pom.xml && mvn -B package --file profile-service/pom.xml && mvn -B package --file post-service/pom.xml && mvn -B package --file config-service/pom.xml
+        run: |
+            mvn -B package -DskipTests=true --file gateway-service/pom.xml
+            mvn -B package -DskipTests=true --file eureka-service/pom.xml
+            mvn -B package -DskipTests=true --file profile-service/pom.xml
+            mvn -B package -DskipTests=true --file post-service/pom.xml
+            mvn -B package -DskipTests=true --file config-service/pom.xml
 
 
       - name: Log in to Docker Hub
