@@ -41,7 +41,7 @@ jobs:
           mvn clean install -DskipTests --file subscriber-service/pom.xml
 
       - name: Ensure JAR file exists
-        run: test -f gateway-service/target/gateway-service-0.0.1-SNAPSHOT.jar || exit 1
+        run: test -f gateway-service/target/gateway-service.jar || exit 1
 
 
       - name: Log in to Docker Hub
