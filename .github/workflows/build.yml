@@ -19,6 +19,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'
+          distribution: 'adopt'
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
@@ -56,4 +57,3 @@ jobs:
           docker push egokirill/profile-service:latest
           docker push egokirill/post-service:latest
           docker push egokirill/config-service:latest
-
