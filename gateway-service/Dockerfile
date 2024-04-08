@@ -1,4 +1,4 @@
 FROM openjdk:17-jdk-alpine
 EXPOSE 8083
-ADD target/test_cicd-0.0.1-SNAPSHOT.jar app.jar
+ADD target/gateway-service-0.0.1-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java","-jar","app.jar"]
