@@ -34,6 +34,7 @@ jobs:
             mvn -B package -DskipTests=true --file profile-service/pom.xml
             mvn -B package -DskipTests=true --file post-service/pom.xml
             mvn -B package -DskipTests=true --file config-service/pom.xml
+            mvn -B package -DskipTests=true --file planner-entity/pom.xml
 
 
       - name: Log in to Docker Hub
