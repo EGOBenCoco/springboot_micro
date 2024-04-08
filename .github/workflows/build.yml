@@ -56,3 +56,4 @@ jobs:
           docker push egokirill/profile-service:latest
           docker push egokirill/post-service:latest
           docker push egokirill/config-service:latest
+
