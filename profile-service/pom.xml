@@ -144,7 +144,11 @@
             <scope>test</scope>
         </dependency>
         <!--TESTING-->
-
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>

@@ -1,0 +1,2083 @@
+---
+modelFingerprint: "84F67141BA0D69333B803C42F86748C6"
+methods:
+- method:
+    name: "createProfile"
+    returnType: "void"
+    signature: "createProfile(com.example.profileservice.model.Profile,java.security.Principal)\
+      \ : void"
+    instructionFingerprint: "EB37F38E8612049271EDBBEDA50CB220"
+    parametersTypes:
+    - "com.example.profileservice.model.Profile"
+    - "java.security.Principal"
+  paths:
+  - pathId: "path1"
+    pathIdForUser: "path1"
+    testPathName: "createProfileTest"
+    nameDefinedByUser: false
+    constructorSignature: "<init>(com.example.profileservice.repository.ProfileRepository,org.modelmapper.ModelMapper,org.keycloak.admin.client.Keycloak,org.springframework.amqp.rabbit.core.RabbitTemplate)\
+      \ : void"
+    priorityDefinedByUser: false
+    filledByUser: false
+    priority: "LOW"
+    modelFingerprint: "5577B8680D9AE13F7B6CE1ABF1732DF3"
+    problemWasSolvedByProver: false
+    truncated: false
+    inputParameters:
+    - type: "CONSTRUCTOR"
+      modelFingerprint: "3575FCC7A8148F2A28DD3DE720A27DF4"
+      index: 1
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "OBJECT"
+        content: !<new>
+          target: "com.example.profileservice.service.ProfileService"
+          parameters:
+          - name: "profileRepository"
+            value:
+              sapientType: "MOCK"
+              valueType: "com.example.profileservice.repository.ProfileRepository"
+              uuid: "<init>_profileRepository1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "modelMapper"
+            value:
+              sapientType: "MOCK"
+              valueType: "org.modelmapper.ModelMapper"
+              uuid: "<init>_modelMapper1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "keycloak"
+            value:
+              sapientType: "MOCK"
+              valueType: "org.keycloak.admin.client.Keycloak"
+              uuid: "<init>_keycloak1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "rabbitTemplate"
+            value:
+              sapientType: "MOCK"
+              valueType: "org.springframework.amqp.rabbit.core.RabbitTemplate"
+              uuid: "<init>_rabbitTemplate1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          privateConstructor: false
+          createdByTargetCode: false
+        suggestedContent: !<new>
+          target: "com.example.profileservice.service.ProfileService"
+          parameters:
+          - name: "profileRepository"
+            value:
+              sapientType: "UNKNOWN"
+              suggestedContent: !<unknown_object>
+                target: "com.example.profileservice.repository.ProfileRepository"
+                onlyPojoFunctions: false
+                builderPattern: false
+              valueType: "com.example.profileservice.repository.ProfileRepository"
+              uuid: "<init>_profileRepository1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "modelMapper"
+            value:
+              sapientType: "UNKNOWN"
+              valueType: "org.modelmapper.ModelMapper"
+              uuid: "<init>_modelMapper1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "keycloak"
+            value:
+              sapientType: "UNKNOWN"
+              valueType: "org.keycloak.admin.client.Keycloak"
+              uuid: "<init>_keycloak1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "rabbitTemplate"
+            value:
+              sapientType: "UNKNOWN"
+              valueType: "org.springframework.amqp.rabbit.core.RabbitTemplate"
+              uuid: "<init>_rabbitTemplate1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          privateConstructor: false
+          createdByTargetCode: false
+        valueType: "com.example.profileservice.service.ProfileService"
+        uuid: "target"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "INPUT"
+      name: "profile"
+      modelFingerprint: "38B4B3073C5898F521AF8FFEFEB3480E"
+      index: 2
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "OBJECT"
+        content: !<new>
+          target: "com.example.profileservice.model.Profile"
+          parameters: []
+          privateConstructor: false
+          createdByTargetCode: false
+          propertiesMap:
+            auth_id:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "auth_id1"
+              valueType: "java.lang.String"
+              uuid: "createProfile_object2"
+              fixed: false
+              collectionUuid: "createProfile_map2"
+              equalsMethodPresent: false
+              explicitCastNeeded: true
+            nickname:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "nickname1"
+              valueType: "java.lang.String"
+              uuid: "createProfile_object1"
+              fixed: false
+              collectionUuid: "createProfile_map1"
+              equalsMethodPresent: false
+              explicitCastNeeded: true
+        suggestedContent: !<new>
+          target: "com.example.profileservice.model.Profile"
+          parameters: []
+          privateConstructor: false
+          createdByTargetCode: false
+          propertiesMap:
+            auth_id:
+              sapientType: "BASIC"
+              valueType: "java.lang.String"
+              uuid: "createProfile_object2"
+              fixed: false
+              collectionUuid: "createProfile_map2"
+              equalsMethodPresent: false
+              explicitCastNeeded: true
+            nickname:
+              sapientType: "BASIC"
+              valueType: "java.lang.String"
+              uuid: "createProfile_object1"
+              fixed: false
+              collectionUuid: "createProfile_map1"
+              equalsMethodPresent: false
+              explicitCastNeeded: true
+        valueType: "com.example.profileservice.model.Profile"
+        uuid: "createProfile_profile1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "INPUT"
+      name: "principal"
+      modelFingerprint: "0BE81A99B622BF7F6EFEA12D87E95E50"
+      index: 3
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "MOCK"
+        valueType: "org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken"
+        uuid: "createProfile_principal1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: true
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "LOCAL_VARIABLE"
+      name: "token"
+      modelFingerprint: "8323E1A2CC9159B32C77E80FFA3A0ECF"
+      index: 4
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "MOCK"
+        valueType: "org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken"
+        uuid: "createProfile_principal1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: true
+      methodExercised:
+        target: "token"
+        name: "getTokenAttributes"
+        parameters: []
+        signature: "getTokenAttributes(): Map"
+        returnValue:
+          sapientType: "COLLECTION"
+          content: !<collection>
+            collectionClass: "java.util.HashMap"
+            parameters: []
+            values:
+            - sapientType: "PAIR"
+              content: !<pair>
+                key:
+                  sapientType: "BASIC"
+                  content: !<regular>
+                    value: "preferred_username"
+                  valueType: "java.lang.String"
+                  fixed: true
+                  equalsMethodPresent: false
+                  explicitCastNeeded: false
+                value:
+                  sapientType: "BASIC"
+                  content: !<regular>
+                    value: "nickname1"
+                  valueType: "java.lang.String"
+                  uuid: "createProfile_object1"
+                  fixed: false
+                  collectionUuid: "createProfile_map1"
+                  equalsMethodPresent: false
+                  explicitCastNeeded: true
+              valueType: "java.util.Map$Entry"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          suggestedContent: !<collection>
+            collectionClass: "java.util.HashMap"
+            parameters: []
+            values:
+            - sapientType: "PAIR"
+              content: !<pair>
+                key:
+                  sapientType: "BASIC"
+                  content: !<regular>
+                    value: "preferred_username"
+                  valueType: "java.lang.String"
+                  fixed: true
+                  equalsMethodPresent: false
+                  explicitCastNeeded: false
+                value:
+                  sapientType: "BASIC"
+                  content: !<regular>
+                    value: "nickname1"
+                  valueType: "java.lang.String"
+                  uuid: "createProfile_object1"
+                  fixed: false
+                  collectionUuid: "createProfile_map1"
+                  equalsMethodPresent: false
+                  explicitCastNeeded: true
+              valueType: "java.util.Map$Entry"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          valueType: "java.util.Map"
+          genericValueType: "java.lang.String,java.lang.Object"
+          uuid: "createProfile_map1"
+          fixed: false
+          equalsMethodPresent: false
+          explicitCastNeeded: false
+        access: 1
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "LOCAL_VARIABLE"
+      name: "token"
+      modelFingerprint: "E9FA690DFB29A9E93A69041158BAA558"
+      index: 5
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "MOCK"
+        valueType: "org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken"
+        uuid: "createProfile_principal1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: true
+      methodExercised:
+        target: "token"
+        name: "getTokenAttributes"
+        parameters: []
+        signature: "getTokenAttributes(): Map"
+        returnValue:
+          sapientType: "COLLECTION"
+          content: !<collection>
+            collectionClass: "java.util.HashMap"
+            parameters: []
+            values:
+            - sapientType: "PAIR"
+              content: !<pair>
+                key:
+                  sapientType: "BASIC"
+                  content: !<regular>
+                    value: "sub"
+                  valueType: "java.lang.String"
+                  fixed: true
+                  equalsMethodPresent: false
+                  explicitCastNeeded: false
+                value:
+                  sapientType: "BASIC"
+                  content: !<regular>
+                    value: "auth_id1"
+                  valueType: "java.lang.String"
+                  uuid: "createProfile_object2"
+                  fixed: false
+                  collectionUuid: "createProfile_map2"
+                  equalsMethodPresent: false
+                  explicitCastNeeded: true
+              valueType: "java.util.Map$Entry"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          suggestedContent: !<collection>
+            collectionClass: "java.util.HashMap"
+            parameters: []
+            values:
+            - sapientType: "PAIR"
+              content: !<pair>
+                key:
+                  sapientType: "BASIC"
+                  content: !<regular>
+                    value: "sub"
+                  valueType: "java.lang.String"
+                  fixed: true
+                  equalsMethodPresent: false
+                  explicitCastNeeded: false
+                value:
+                  sapientType: "BASIC"
+                  content: !<regular>
+                    value: "auth_id1"
+                  valueType: "java.lang.String"
+                  uuid: "createProfile_object2"
+                  fixed: false
+                  collectionUuid: "createProfile_map2"
+                  equalsMethodPresent: false
+                  explicitCastNeeded: true
+              valueType: "java.util.Map$Entry"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          valueType: "java.util.Map"
+          genericValueType: "java.lang.String,java.lang.Object"
+          uuid: "createProfile_map2"
+          fixed: false
+          equalsMethodPresent: false
+          explicitCastNeeded: false
+        access: 1
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "LOCAL_VARIABLE"
+      name: "profile"
+      modelFingerprint: "330C07D4B2355B4391339FAD5859641E"
+      index: 6
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "OBJECT"
+        content: !<new>
+          target: "com.example.profileservice.model.Profile"
+          parameters: []
+          privateConstructor: false
+          createdByTargetCode: false
+          propertiesMap:
+            auth_id:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "auth_id1"
+              valueType: "java.lang.String"
+              uuid: "createProfile_object2"
+              fixed: false
+              collectionUuid: "createProfile_map2"
+              equalsMethodPresent: false
+              explicitCastNeeded: true
+            nickname:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "nickname1"
+              valueType: "java.lang.String"
+              uuid: "createProfile_object1"
+              fixed: false
+              collectionUuid: "createProfile_map1"
+              equalsMethodPresent: false
+              explicitCastNeeded: true
+        suggestedContent: !<new>
+          target: "com.example.profileservice.model.Profile"
+          parameters: []
+          privateConstructor: false
+          createdByTargetCode: false
+          propertiesMap:
+            auth_id:
+              sapientType: "BASIC"
+              valueType: "java.lang.String"
+              uuid: "createProfile_object2"
+              fixed: false
+              collectionUuid: "createProfile_map2"
+              equalsMethodPresent: false
+              explicitCastNeeded: true
+            nickname:
+              sapientType: "BASIC"
+              valueType: "java.lang.String"
+              uuid: "createProfile_object1"
+              fixed: false
+              collectionUuid: "createProfile_map1"
+              equalsMethodPresent: false
+              explicitCastNeeded: true
+        valueType: "com.example.profileservice.model.Profile"
+        uuid: "createProfile_profile1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      methodExercised:
+        target: "profile"
+        name: "setNickname"
+        parameters:
+        - name: "nickname"
+          value:
+            sapientType: "BASIC"
+            content: !<regular>
+              value: "nickname1"
+            valueType: "java.lang.String"
+            uuid: "createProfile_object1"
+            fixed: false
+            collectionUuid: "createProfile_map1"
+            equalsMethodPresent: false
+            explicitCastNeeded: true
+        signature: "setNickname(String): void"
+        returnValue:
+          sapientType: "VOID"
+          valueType: "void"
+          uuid: "createProfile_void1"
+          fixed: true
+          equalsMethodPresent: false
+          explicitCastNeeded: false
+        access: 1
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "LOCAL_VARIABLE"
+      name: "profile"
+      modelFingerprint: "0D2F4403AA82B022460EF5D53C0BCE34"
+      index: 7
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "OBJECT"
+        content: !<new>
+          target: "com.example.profileservice.model.Profile"
+          parameters: []
+          privateConstructor: false
+          createdByTargetCode: false
+          propertiesMap:
+            auth_id:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "auth_id1"
+              valueType: "java.lang.String"
+              uuid: "createProfile_object2"
+              fixed: false
+              collectionUuid: "createProfile_map2"
+              equalsMethodPresent: false
+              explicitCastNeeded: true
+            nickname:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "nickname1"
+              valueType: "java.lang.String"
+              uuid: "createProfile_object1"
+              fixed: false
+              collectionUuid: "createProfile_map1"
+              equalsMethodPresent: false
+              explicitCastNeeded: true
+        suggestedContent: !<new>
+          target: "com.example.profileservice.model.Profile"
+          parameters: []
+          privateConstructor: false
+          createdByTargetCode: false
+          propertiesMap:
+            auth_id:
+              sapientType: "BASIC"
+              valueType: "java.lang.String"
+              uuid: "createProfile_object2"
+              fixed: false
+              collectionUuid: "createProfile_map2"
+              equalsMethodPresent: false
+              explicitCastNeeded: true
+            nickname:
+              sapientType: "BASIC"
+              valueType: "java.lang.String"
+              uuid: "createProfile_object1"
+              fixed: false
+              collectionUuid: "createProfile_map1"
+              equalsMethodPresent: false
+              explicitCastNeeded: true
+        valueType: "com.example.profileservice.model.Profile"
+        uuid: "createProfile_profile1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      methodExercised:
+        target: "profile"
+        name: "setAuth_id"
+        parameters:
+        - name: "auth_id"
+          value:
+            sapientType: "BASIC"
+            content: !<regular>
+              value: "auth_id1"
+            valueType: "java.lang.String"
+            uuid: "createProfile_object2"
+            fixed: false
+            collectionUuid: "createProfile_map2"
+            equalsMethodPresent: false
+            explicitCastNeeded: true
+        signature: "setAuth_id(String): void"
+        returnValue:
+          sapientType: "VOID"
+          valueType: "void"
+          uuid: "createProfile_void2"
+          fixed: true
+          equalsMethodPresent: false
+          explicitCastNeeded: false
+        access: 1
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "FIELD"
+      name: "profileRepository"
+      modelFingerprint: "1E9CA629B4FA23A74DC992C949C89962"
+      index: 8
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "MOCK"
+        valueType: "com.example.profileservice.repository.ProfileRepository"
+        uuid: "<init>_profileRepository1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      methodExercised:
+        target: "this.profileRepository"
+        name: "save"
+        parameters:
+        - name: "entity"
+          value:
+            sapientType: "OBJECT"
+            content: !<new>
+              target: "com.example.profileservice.model.Profile"
+              parameters: []
+              privateConstructor: false
+              createdByTargetCode: false
+              propertiesMap:
+                auth_id:
+                  sapientType: "BASIC"
+                  content: !<regular>
+                    value: "auth_id1"
+                  valueType: "java.lang.String"
+                  uuid: "createProfile_object2"
+                  fixed: false
+                  collectionUuid: "createProfile_map2"
+                  equalsMethodPresent: false
+                  explicitCastNeeded: true
+                nickname:
+                  sapientType: "BASIC"
+                  content: !<regular>
+                    value: "nickname1"
+                  valueType: "java.lang.String"
+                  uuid: "createProfile_object1"
+                  fixed: false
+                  collectionUuid: "createProfile_map1"
+                  equalsMethodPresent: false
+                  explicitCastNeeded: true
+            suggestedContent: !<new>
+              target: "com.example.profileservice.model.Profile"
+              parameters: []
+              privateConstructor: false
+              createdByTargetCode: false
+              propertiesMap:
+                auth_id:
+                  sapientType: "BASIC"
+                  valueType: "java.lang.String"
+                  uuid: "createProfile_object2"
+                  fixed: false
+                  collectionUuid: "createProfile_map2"
+                  equalsMethodPresent: false
+                  explicitCastNeeded: true
+                nickname:
+                  sapientType: "BASIC"
+                  valueType: "java.lang.String"
+                  uuid: "createProfile_object1"
+                  fixed: false
+                  collectionUuid: "createProfile_map1"
+                  equalsMethodPresent: false
+                  explicitCastNeeded: true
+            valueType: "com.example.profileservice.model.Profile"
+            uuid: "createProfile_profile1"
+            fixed: false
+            equalsMethodPresent: false
+            explicitCastNeeded: false
+        signature: "save(Profile): Object"
+        returnValue:
+          sapientType: "OBJECT"
+          content: !<new>
+            target: "java.lang.Object"
+            parameters: []
+            privateConstructor: false
+            createdByTargetCode: false
+          suggestedContent: !<new>
+            target: "java.lang.Object"
+            parameters: []
+            privateConstructor: false
+            createdByTargetCode: false
+          valueType: "java.lang.Object"
+          uuid: "createProfile_object3"
+          fixed: false
+          equalsMethodPresent: false
+          explicitCastNeeded: false
+        access: 1025
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "RESULT"
+      name: "result"
+      modelFingerprint: "68041019986276EDF5D420282D883A57"
+      index: 9
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "VOID"
+        fixed: true
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      staticReadMethodForField: false
+      filledByUser: false
+    uuid: "dd184acd-0c5f-36b2-ac3b-e0a3538fefa3"
+    deleted: false
+    disabled: true
+    ignoredBySystem: false
+    failureReason:
+      reason: "UNKNOWN_REASON"
+    prover: "DEFAULT"
+    disabledStatusUpdatedByUser: false
+    disabledStatusUpdatedBySystem: true
+- method:
+    name: "getById"
+    returnType: "com.example.plannerentity.dto.responce.ProfileResponce"
+    signature: "getById(int) : com.example.plannerentity.dto.responce.ProfileResponce"
+    instructionFingerprint: "638E84D186D5A85818273D89474BBA76"
+    parametersTypes:
+    - "int"
+  paths:
+  - pathId: "path1"
+    pathIdForUser: "path1"
+    testPathName: "getByIdThrowsCustomException"
+    nameDefinedByUser: false
+    constructorSignature: "<init>(com.example.profileservice.repository.ProfileRepository,org.modelmapper.ModelMapper,org.keycloak.admin.client.Keycloak,org.springframework.amqp.rabbit.core.RabbitTemplate)\
+      \ : void"
+    priorityDefinedByUser: false
+    filledByUser: false
+    priority: "LOW"
+    modelFingerprint: "966DC4C62F123FD5E8E33E4A44051A92"
+    problemWasSolvedByProver: true
+    truncated: false
+    inputParameters:
+    - type: "CONSTRUCTOR"
+      modelFingerprint: "3575FCC7A8148F2A28DD3DE720A27DF4"
+      index: 1
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "OBJECT"
+        content: !<new>
+          target: "com.example.profileservice.service.ProfileService"
+          parameters:
+          - name: "profileRepository"
+            value:
+              sapientType: "MOCK"
+              valueType: "com.example.profileservice.repository.ProfileRepository"
+              uuid: "<init>_profileRepository1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "modelMapper"
+            value:
+              sapientType: "MOCK"
+              valueType: "org.modelmapper.ModelMapper"
+              uuid: "<init>_modelMapper1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "keycloak"
+            value:
+              sapientType: "MOCK"
+              valueType: "org.keycloak.admin.client.Keycloak"
+              uuid: "<init>_keycloak1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "rabbitTemplate"
+            value:
+              sapientType: "MOCK"
+              valueType: "org.springframework.amqp.rabbit.core.RabbitTemplate"
+              uuid: "<init>_rabbitTemplate1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          privateConstructor: false
+          createdByTargetCode: false
+        suggestedContent: !<new>
+          target: "com.example.profileservice.service.ProfileService"
+          parameters:
+          - name: "profileRepository"
+            value:
+              sapientType: "UNKNOWN"
+              suggestedContent: !<unknown_object>
+                target: "com.example.profileservice.repository.ProfileRepository"
+                onlyPojoFunctions: false
+                builderPattern: false
+              valueType: "com.example.profileservice.repository.ProfileRepository"
+              uuid: "<init>_profileRepository1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "modelMapper"
+            value:
+              sapientType: "UNKNOWN"
+              valueType: "org.modelmapper.ModelMapper"
+              uuid: "<init>_modelMapper1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "keycloak"
+            value:
+              sapientType: "UNKNOWN"
+              valueType: "org.keycloak.admin.client.Keycloak"
+              uuid: "<init>_keycloak1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "rabbitTemplate"
+            value:
+              sapientType: "UNKNOWN"
+              valueType: "org.springframework.amqp.rabbit.core.RabbitTemplate"
+              uuid: "<init>_rabbitTemplate1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          privateConstructor: false
+          createdByTargetCode: false
+        valueType: "com.example.profileservice.service.ProfileService"
+        uuid: "target"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "INPUT"
+      name: "id"
+      modelFingerprint: "3BB73660848C2F5DCC3CCCC090DD258F"
+      index: 2
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "BASIC"
+        content: !<regular>
+          value: 1
+        suggestedContent: !<regular>
+          value: 1
+        valueType: "int"
+        uuid: "getById_int1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "FIELD"
+      name: "profileRepository"
+      modelFingerprint: "F35EA9EC8ADA1567449AA2EA617F55FF"
+      index: 3
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "MOCK"
+        valueType: "com.example.profileservice.repository.ProfileRepository"
+        uuid: "<init>_profileRepository1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      methodExercised:
+        target: "this.profileRepository"
+        name: "findById"
+        parameters:
+        - name: "id"
+          value:
+            sapientType: "BASIC"
+            content: !<regular>
+              value: 1
+            suggestedContent: !<regular>
+              value: 1
+            valueType: "java.lang.Integer"
+            uuid: "getById_integer1"
+            fixed: false
+            equalsMethodPresent: false
+            explicitCastNeeded: false
+        signature: "findById(Integer): Optional"
+        returnValue:
+          sapientType: "OPTIONAL"
+          content: !<optional>
+            value:
+              sapientType: "NULL"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+            target: "java.util.Optional"
+          valueType: "java.util.Optional"
+          uuid: "getById_optional1"
+          fixed: false
+          equalsMethodPresent: false
+          explicitCastNeeded: false
+        access: 1025
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "RESULT"
+      name: "result"
+      modelFingerprint: "7E2E21BEB7264967D213345232AF2558"
+      index: 4
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "EXCEPTION"
+        content: !<new>
+          target: "com.example.plannerentity.global_exception.CustomException"
+          parameters:
+          - name: "message"
+            value:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "Profile not found"
+              valueType: "java.lang.String"
+              fixed: true
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "status"
+            value:
+              sapientType: "ENUM"
+              content: !<regular>
+                value: "NOT_FOUND"
+              valueType: "org.springframework.http.HttpStatus"
+              uuid: "Enum-org.springframework.http.HttpStatus-NOT_FOUND"
+              fixed: true
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          privateConstructor: false
+          createdByTargetCode: true
+        suggestedContent: !<new>
+          target: "com.example.plannerentity.global_exception.CustomException"
+          parameters:
+          - name: "message"
+            value:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "Profile not found"
+              valueType: "java.lang.String"
+              fixed: true
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "status"
+            value:
+              sapientType: "ENUM"
+              content: !<regular>
+                value: "NOT_FOUND"
+              valueType: "org.springframework.http.HttpStatus"
+              uuid: "Enum-org.springframework.http.HttpStatus-NOT_FOUND"
+              fixed: true
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          privateConstructor: false
+          createdByTargetCode: true
+        valueType: "com.example.plannerentity.global_exception.CustomException"
+        uuid: "lambda$getById$0_customException1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      staticReadMethodForField: false
+      filledByUser: false
+    uuid: "19c31292-e02d-3729-b0e7-e4641fba843c"
+    deleted: false
+    disabled: false
+    ignoredBySystem: false
+    prover: "DEFAULT"
+    disabledStatusUpdatedByUser: false
+    disabledStatusUpdatedBySystem: false
+- method:
+    name: "updateUser"
+    returnType: "void"
+    signature: "updateUser(com.example.plannerentity.dto.request.ProfileUpdateRequest,java.security.Principal)\
+      \ : void"
+    instructionFingerprint: "3358641C55717F5D6413DF6B593F22A0"
+    parametersTypes:
+    - "com.example.plannerentity.dto.request.ProfileUpdateRequest"
+    - "java.security.Principal"
+  paths:
+  - pathId: "path1"
+    pathIdForUser: "path1"
+    testPathName: "updateUserTest"
+    nameDefinedByUser: false
+    constructorSignature: "<init>(com.example.profileservice.repository.ProfileRepository,org.modelmapper.ModelMapper,org.keycloak.admin.client.Keycloak,org.springframework.amqp.rabbit.core.RabbitTemplate)\
+      \ : void"
+    priorityDefinedByUser: false
+    filledByUser: false
+    priority: "LOW"
+    modelFingerprint: "EE415F489AFE08E0E0DC9B98995AECF2"
+    problemWasSolvedByProver: false
+    truncated: false
+    inputParameters:
+    - type: "CONSTRUCTOR"
+      modelFingerprint: "E5AC018770C741BE40A800DD7B455563"
+      index: 1
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "OBJECT"
+        content: !<new>
+          target: "com.example.profileservice.service.ProfileService"
+          parameters:
+          - name: "profileRepository"
+            value:
+              sapientType: "MOCK"
+              valueType: "com.example.profileservice.repository.ProfileRepository"
+              uuid: "<init>_profileRepository1"
+              fixed: false
+              nameForMock: "profileRepository"
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "modelMapper"
+            value:
+              sapientType: "OBJECT"
+              content: !<new>
+                target: "org.modelmapper.ModelMapper"
+                parameters: []
+                privateConstructor: false
+                createdByTargetCode: false
+              suggestedContent: !<new>
+                target: "org.modelmapper.ModelMapper"
+                parameters: []
+                privateConstructor: false
+                createdByTargetCode: false
+              valueType: "org.modelmapper.ModelMapper"
+              uuid: "<init>_modelMapper1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "keycloak"
+            value:
+              sapientType: "OBJECT"
+              content: !<static_method_return>
+                target: "org.keycloak.admin.client.Keycloak"
+                method: "getInstance"
+                methodParameters:
+                - name: "serverUrl"
+                  value:
+                    sapientType: "BASIC"
+                    content: !<regular>
+                      value: "serverUrl1"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-serverUrl"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "realm"
+                  value:
+                    sapientType: "BASIC"
+                    content: !<regular>
+                      value: "realm1"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-realm"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "username"
+                  value:
+                    sapientType: "BASIC"
+                    content: !<regular>
+                      value: "username1"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-username"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "password"
+                  value:
+                    sapientType: "BASIC"
+                    content: !<regular>
+                      value: "password1"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-password"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "clientId"
+                  value:
+                    sapientType: "BASIC"
+                    content: !<regular>
+                      value: "clientId1"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-clientId"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "clientSecret"
+                  value:
+                    sapientType: "BASIC"
+                    content: !<regular>
+                      value: "clientSecret1"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-clientSecret"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+              suggestedContent: !<static_method_return>
+                target: "org.keycloak.admin.client.Keycloak"
+                method: "getInstance"
+                methodParameters:
+                - name: "serverUrl"
+                  value:
+                    sapientType: "BASIC"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-serverUrl"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "realm"
+                  value:
+                    sapientType: "BASIC"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-realm"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "username"
+                  value:
+                    sapientType: "BASIC"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-username"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "password"
+                  value:
+                    sapientType: "BASIC"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-password"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "clientId"
+                  value:
+                    sapientType: "BASIC"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-clientId"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "clientSecret"
+                  value:
+                    sapientType: "BASIC"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-clientSecret"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+              valueType: "org.keycloak.admin.client.Keycloak"
+              uuid: "<init>_keycloak1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "rabbitTemplate"
+            value:
+              sapientType: "OBJECT"
+              content: !<new>
+                target: "org.springframework.amqp.rabbit.core.RabbitTemplate"
+                parameters: []
+                privateConstructor: false
+                createdByTargetCode: false
+              suggestedContent: !<new>
+                target: "org.springframework.amqp.rabbit.core.RabbitTemplate"
+                parameters: []
+                privateConstructor: false
+                createdByTargetCode: false
+              valueType: "org.springframework.amqp.rabbit.core.RabbitTemplate"
+              uuid: "<init>_rabbitTemplate1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          privateConstructor: false
+          createdByTargetCode: false
+        suggestedContent: !<new>
+          target: "com.example.profileservice.service.ProfileService"
+          parameters:
+          - name: "profileRepository"
+            value:
+              sapientType: "MOCK"
+              valueType: "com.example.profileservice.repository.ProfileRepository"
+              uuid: "<init>_profileRepository1"
+              fixed: false
+              nameForMock: "profileRepository"
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "modelMapper"
+            value:
+              sapientType: "OBJECT"
+              content: !<new>
+                target: "org.modelmapper.ModelMapper"
+                parameters: []
+                privateConstructor: false
+                createdByTargetCode: false
+              suggestedContent: !<new>
+                target: "org.modelmapper.ModelMapper"
+                parameters: []
+                privateConstructor: false
+                createdByTargetCode: false
+              valueType: "org.modelmapper.ModelMapper"
+              uuid: "<init>_modelMapper1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "keycloak"
+            value:
+              sapientType: "OBJECT"
+              content: !<static_method_return>
+                target: "org.keycloak.admin.client.Keycloak"
+                method: "getInstance"
+                methodParameters:
+                - name: "serverUrl"
+                  value:
+                    sapientType: "BASIC"
+                    content: !<regular>
+                      value: "serverUrl1"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-serverUrl"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "realm"
+                  value:
+                    sapientType: "BASIC"
+                    content: !<regular>
+                      value: "realm1"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-realm"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "username"
+                  value:
+                    sapientType: "BASIC"
+                    content: !<regular>
+                      value: "username1"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-username"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "password"
+                  value:
+                    sapientType: "BASIC"
+                    content: !<regular>
+                      value: "password1"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-password"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "clientId"
+                  value:
+                    sapientType: "BASIC"
+                    content: !<regular>
+                      value: "clientId1"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-clientId"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "clientSecret"
+                  value:
+                    sapientType: "BASIC"
+                    content: !<regular>
+                      value: "clientSecret1"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-clientSecret"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+              suggestedContent: !<static_method_return>
+                target: "org.keycloak.admin.client.Keycloak"
+                method: "getInstance"
+                methodParameters:
+                - name: "serverUrl"
+                  value:
+                    sapientType: "BASIC"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-serverUrl"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "realm"
+                  value:
+                    sapientType: "BASIC"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-realm"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "username"
+                  value:
+                    sapientType: "BASIC"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-username"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "password"
+                  value:
+                    sapientType: "BASIC"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-password"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "clientId"
+                  value:
+                    sapientType: "BASIC"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-clientId"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+                - name: "clientSecret"
+                  value:
+                    sapientType: "BASIC"
+                    valueType: "java.lang.String"
+                    uuid: "<init>_keycloak1-clientSecret"
+                    fixed: false
+                    equalsMethodPresent: false
+                    explicitCastNeeded: false
+              valueType: "org.keycloak.admin.client.Keycloak"
+              uuid: "<init>_keycloak1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "rabbitTemplate"
+            value:
+              sapientType: "OBJECT"
+              content: !<new>
+                target: "org.springframework.amqp.rabbit.core.RabbitTemplate"
+                parameters: []
+                privateConstructor: false
+                createdByTargetCode: false
+              suggestedContent: !<new>
+                target: "org.springframework.amqp.rabbit.core.RabbitTemplate"
+                parameters: []
+                privateConstructor: false
+                createdByTargetCode: false
+              valueType: "org.springframework.amqp.rabbit.core.RabbitTemplate"
+              uuid: "<init>_rabbitTemplate1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          privateConstructor: false
+          createdByTargetCode: false
+        valueType: "com.example.profileservice.service.ProfileService"
+        uuid: "target"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "INPUT"
+      name: "user"
+      modelFingerprint: "A1909711C3AC5D603FC924352068B896"
+      index: 2
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "OBJECT"
+        content: !<new>
+          target: "com.example.plannerentity.dto.request.ProfileUpdateRequest"
+          parameters: []
+          privateConstructor: false
+          createdByTargetCode: false
+          propertiesMap:
+            nickname:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "JohnDoe"
+              suggestedContent: !<regular>
+                value: "JohnDoe"
+              valueType: "java.lang.String"
+              uuid: "updateUser_profileUpdateRequest1-nickname"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+            bio:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "Java Developer"
+              suggestedContent: !<regular>
+                value: "Java Developer"
+              valueType: "java.lang.String"
+              uuid: "updateUser_profileUpdateRequest1-bio"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+        suggestedContent: !<new>
+          target: "com.example.plannerentity.dto.request.ProfileUpdateRequest"
+          parameters: []
+          privateConstructor: false
+          createdByTargetCode: false
+          propertiesMap:
+            nickname:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "JohnDoe"
+              suggestedContent: !<regular>
+                value: "JohnDoe"
+              valueType: "java.lang.String"
+              uuid: "updateUser_profileUpdateRequest1-nickname"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+            bio:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "Java Developer"
+              suggestedContent: !<regular>
+                value: "Java Developer"
+              valueType: "java.lang.String"
+              uuid: "updateUser_profileUpdateRequest1-bio"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+        valueType: "com.example.plannerentity.dto.request.ProfileUpdateRequest"
+        uuid: "updateUser_profileUpdateRequest1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "INPUT"
+      name: "principal"
+      modelFingerprint: "BDC947F9C4DC9F2E847F216CDC5DE6AE"
+      index: 3
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "OBJECT"
+        content: !<new>
+          target: "org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken"
+          parameters:
+          - name: "jwt"
+            value:
+              sapientType: "MOCK"
+              valueType: "org.springframework.security.oauth2.jwt.Jwt"
+              uuid: "updateUser_principal1-jwt"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "authorities"
+            value:
+              sapientType: "COLLECTION"
+              content: !<collection>
+                parameters: []
+                values: []
+              suggestedContent: !<collection>
+                parameters: []
+                values: []
+              valueType: "java.util.Collection"
+              uuid: "updateUser_principal1-authorities"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "name"
+            value:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "John Doe"
+              suggestedContent: !<regular>
+                value: "John Doe"
+              valueType: "java.lang.String"
+              uuid: "updateUser_principal1-name"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          privateConstructor: false
+          createdByTargetCode: false
+        suggestedContent: !<new>
+          target: "org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken"
+          parameters:
+          - name: "jwt"
+            value:
+              sapientType: "UNKNOWN"
+              valueType: "org.springframework.security.oauth2.jwt.Jwt"
+              uuid: "updateUser_principal1-jwt"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "authorities"
+            value:
+              sapientType: "COLLECTION"
+              valueType: "java.util.Collection"
+              uuid: "updateUser_principal1-authorities"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "name"
+            value:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "John Doe"
+              suggestedContent: !<regular>
+                value: "John Doe"
+              valueType: "java.lang.String"
+              uuid: "updateUser_principal1-name"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          privateConstructor: false
+          createdByTargetCode: false
+        valueType: "org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken"
+        uuid: "updateUser_principal1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: true
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "LOCAL_VARIABLE"
+      name: "token"
+      modelFingerprint: "FC57843D8AE30CACAE5B9FD0621DF58B"
+      index: 4
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "OBJECT"
+        content: !<new>
+          target: "org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken"
+          parameters:
+          - name: "jwt"
+            value:
+              sapientType: "MOCK"
+              valueType: "org.springframework.security.oauth2.jwt.Jwt"
+              uuid: "updateUser_principal1-jwt"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "authorities"
+            value:
+              sapientType: "COLLECTION"
+              content: !<collection>
+                parameters: []
+                values: []
+              suggestedContent: !<collection>
+                parameters: []
+                values: []
+              valueType: "java.util.Collection"
+              uuid: "updateUser_principal1-authorities"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "name"
+            value:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "John Doe"
+              suggestedContent: !<regular>
+                value: "John Doe"
+              valueType: "java.lang.String"
+              uuid: "updateUser_principal1-name"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          privateConstructor: false
+          createdByTargetCode: false
+        suggestedContent: !<new>
+          target: "org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken"
+          parameters:
+          - name: "jwt"
+            value:
+              sapientType: "UNKNOWN"
+              valueType: "org.springframework.security.oauth2.jwt.Jwt"
+              uuid: "updateUser_principal1-jwt"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "authorities"
+            value:
+              sapientType: "COLLECTION"
+              valueType: "java.util.Collection"
+              uuid: "updateUser_principal1-authorities"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "name"
+            value:
+              sapientType: "BASIC"
+              content: !<regular>
+                value: "John Doe"
+              suggestedContent: !<regular>
+                value: "John Doe"
+              valueType: "java.lang.String"
+              uuid: "updateUser_principal1-name"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          privateConstructor: false
+          createdByTargetCode: false
+        valueType: "org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken"
+        uuid: "updateUser_principal1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: true
+      methodExercised:
+        target: "token"
+        name: "getTokenAttributes"
+        parameters: []
+        signature: "getTokenAttributes(): Map"
+        returnValue:
+          sapientType: "COLLECTION"
+          content: !<collection>
+            collectionClass: "java.util.HashMap"
+            parameters: []
+            values: []
+          suggestedContent: !<collection>
+            collectionClass: "java.util.HashMap"
+            parameters: []
+            values: []
+          valueType: "java.util.Map"
+          genericValueType: "java.lang.String,java.lang.Object"
+          uuid: "updateUser_map1"
+          fixed: false
+          equalsMethodPresent: false
+          explicitCastNeeded: false
+        access: 1
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "FIELD"
+      name: "profileRepository"
+      modelFingerprint: "BD8ECA32F19096CBC32010F47F559D41"
+      index: 5
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "MOCK"
+        valueType: "com.example.profileservice.repository.ProfileRepository"
+        uuid: "<init>_profileRepository1"
+        fixed: false
+        nameForMock: "profileRepository"
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      methodExercised:
+        target: "this.profileRepository"
+        name: "findProfileByAuth_id"
+        parameters:
+        - name: "sub"
+          value:
+            sapientType: "NULL"
+            valueType: "java.lang.String"
+            uuid: "updateUser_object1"
+            fixed: false
+            collectionUuid: "updateUser_map1"
+            equalsMethodPresent: false
+            explicitCastNeeded: true
+        signature: "findProfileByAuth_id(String): Optional"
+        returnValue:
+          sapientType: "OPTIONAL"
+          content: !<optional>
+            value:
+              sapientType: "OBJECT"
+              content: !<new>
+                target: "com.example.profileservice.model.Profile"
+                parameters: []
+                privateConstructor: false
+                createdByTargetCode: false
+              suggestedContent: !<new>
+                target: "com.example.profileservice.model.Profile"
+                parameters: []
+                privateConstructor: false
+                createdByTargetCode: false
+              valueType: "com.example.profileservice.model.Profile"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+            target: "java.util.Optional"
+          suggestedContent: !<optional>
+            value:
+              sapientType: "OBJECT"
+              content: !<new>
+                target: "com.example.profileservice.model.Profile"
+                parameters: []
+                privateConstructor: false
+                createdByTargetCode: false
+              suggestedContent: !<new>
+                target: "com.example.profileservice.model.Profile"
+                parameters: []
+                privateConstructor: false
+                createdByTargetCode: false
+              valueType: "com.example.profileservice.model.Profile"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+            target: "java.util.Optional"
+          valueType: "java.util.Optional"
+          genericValueType: "com.example.profileservice.model.Profile"
+          uuid: "updateUser_optional1"
+          fixed: false
+          equalsMethodPresent: false
+          explicitCastNeeded: false
+        access: 1025
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "RESULT"
+      name: "result"
+      modelFingerprint: "68041019986276EDF5D420282D883A57"
+      index: 6
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "VOID"
+        fixed: true
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      staticReadMethodForField: false
+      filledByUser: false
+    uuid: "03164651-d6f3-3ec8-b1cc-e691495e8a1b"
+    deleted: false
+    disabled: true
+    ignoredBySystem: false
+    failureReason:
+      reason: "METHOD_WITHOUT_EXPRESSION_SUPPORT"
+      details: "Expression missing: java.util.Optional.ifPresentOrElse(java.util.function.Consumer,java.lang.Runnable)\
+        \ : void"
+    prover: "LLM"
+    disabledStatusUpdatedByUser: false
+    disabledStatusUpdatedBySystem: true
+- method:
+    name: "deleteById"
+    returnType: "void"
+    signature: "deleteById(int,java.security.Principal) : void"
+    instructionFingerprint: "21A535D30D27059DEFF73BD63BA6393A"
+    parametersTypes:
+    - "int"
+    - "java.security.Principal"
+  paths:
+  - pathId: "path1"
+    pathIdForUser: "path1"
+    testPathName: "deleteByIdTest"
+    nameDefinedByUser: false
+    constructorSignature: "<init>(com.example.profileservice.repository.ProfileRepository,org.modelmapper.ModelMapper,org.keycloak.admin.client.Keycloak,org.springframework.amqp.rabbit.core.RabbitTemplate)\
+      \ : void"
+    priorityDefinedByUser: false
+    filledByUser: false
+    priority: "LOW"
+    modelFingerprint: "D74589B7965FDC08E35E794161C42F76"
+    problemWasSolvedByProver: true
+    truncated: false
+    inputParameters:
+    - type: "CONSTRUCTOR"
+      modelFingerprint: "CBB4825EF4D0FF3D1955A57102B045E8"
+      index: 1
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "OBJECT"
+        content: !<new>
+          target: "com.example.profileservice.service.ProfileService"
+          parameters:
+          - name: "profileRepository"
+            value:
+              sapientType: "MOCK"
+              valueType: "com.example.profileservice.repository.ProfileRepository"
+              uuid: "<init>_profileRepository1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "modelMapper"
+            value:
+              sapientType: "MOCK"
+              valueType: "org.modelmapper.ModelMapper"
+              uuid: "<init>_modelMapper1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "keycloak"
+            value:
+              sapientType: "MOCK"
+              valueType: "org.keycloak.admin.client.Keycloak"
+              uuid: "<init>_keycloak1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "rabbitTemplate"
+            value:
+              sapientType: "MOCK"
+              valueType: "org.springframework.amqp.rabbit.core.RabbitTemplate"
+              uuid: "<init>_rabbitTemplate1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          privateConstructor: false
+          createdByTargetCode: false
+        suggestedContent: !<new>
+          target: "com.example.profileservice.service.ProfileService"
+          parameters:
+          - name: "profileRepository"
+            value:
+              sapientType: "UNKNOWN"
+              suggestedContent: !<unknown_object>
+                target: "com.example.profileservice.repository.ProfileRepository"
+                onlyPojoFunctions: false
+                builderPattern: false
+              valueType: "com.example.profileservice.repository.ProfileRepository"
+              uuid: "<init>_profileRepository1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "modelMapper"
+            value:
+              sapientType: "UNKNOWN"
+              valueType: "org.modelmapper.ModelMapper"
+              uuid: "<init>_modelMapper1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "keycloak"
+            value:
+              sapientType: "UNKNOWN"
+              suggestedContent: !<unknown_object>
+                target: "org.keycloak.admin.client.Keycloak"
+                onlyPojoFunctions: false
+                builderPattern: false
+              valueType: "org.keycloak.admin.client.Keycloak"
+              uuid: "<init>_keycloak1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          - name: "rabbitTemplate"
+            value:
+              sapientType: "UNKNOWN"
+              valueType: "org.springframework.amqp.rabbit.core.RabbitTemplate"
+              uuid: "<init>_rabbitTemplate1"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          privateConstructor: false
+          createdByTargetCode: false
+        valueType: "com.example.profileservice.service.ProfileService"
+        uuid: "target"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "INPUT"
+      name: "id"
+      modelFingerprint: "3BB73660848C2F5DCC3CCCC090DD258F"
+      index: 2
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "BASIC"
+        content: !<regular>
+          value: 1
+        suggestedContent: !<regular>
+          value: 1
+        valueType: "int"
+        uuid: "deleteById_int1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "INPUT"
+      name: "principal"
+      modelFingerprint: "0BE81A99B622BF7F6EFEA12D87E95E50"
+      index: 3
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "MOCK"
+        valueType: "org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken"
+        uuid: "deleteById_principal1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: true
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "LOCAL_VARIABLE"
+      name: "token"
+      modelFingerprint: "E9FA690DFB29A9E93A69041158BAA558"
+      index: 4
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "MOCK"
+        valueType: "org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken"
+        uuid: "deleteById_principal1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: true
+      methodExercised:
+        target: "token"
+        name: "getTokenAttributes"
+        parameters: []
+        signature: "getTokenAttributes(): Map"
+        returnValue:
+          sapientType: "COLLECTION"
+          content: !<collection>
+            collectionClass: "java.util.HashMap"
+            parameters: []
+            values:
+            - sapientType: "PAIR"
+              content: !<pair>
+                key:
+                  sapientType: "BASIC"
+                  content: !<regular>
+                    value: "sub"
+                  valueType: "java.lang.String"
+                  fixed: true
+                  equalsMethodPresent: false
+                  explicitCastNeeded: false
+                value:
+                  sapientType: "BASIC"
+                  content: !<regular>
+                    value: "return_of_getTokenAttributesItem1Value1"
+                  valueType: "java.lang.String"
+                  uuid: "deleteById_object1"
+                  fixed: false
+                  collectionUuid: "deleteById_map1"
+                  equalsMethodPresent: false
+                  explicitCastNeeded: true
+              valueType: "java.util.Map$Entry"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          suggestedContent: !<collection>
+            collectionClass: "java.util.HashMap"
+            parameters: []
+            values:
+            - sapientType: "PAIR"
+              content: !<pair>
+                key:
+                  sapientType: "BASIC"
+                  content: !<regular>
+                    value: "sub"
+                  valueType: "java.lang.String"
+                  fixed: true
+                  equalsMethodPresent: false
+                  explicitCastNeeded: false
+                value:
+                  sapientType: "BASIC"
+                  content: !<regular>
+                    value: "return_of_getTokenAttributesItem1Value1"
+                  valueType: "java.lang.String"
+                  uuid: "deleteById_object1"
+                  fixed: false
+                  collectionUuid: "deleteById_map1"
+                  equalsMethodPresent: false
+                  explicitCastNeeded: true
+              valueType: "java.util.Map$Entry"
+              fixed: false
+              equalsMethodPresent: false
+              explicitCastNeeded: false
+          valueType: "java.util.Map"
+          genericValueType: "java.lang.String,java.lang.Object"
+          uuid: "deleteById_map1"
+          fixed: false
+          equalsMethodPresent: false
+          explicitCastNeeded: false
+        access: 1
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "FIELD"
+      name: "profileRepository"
+      modelFingerprint: "020228BED7D11B9E1C137592C7E50277"
+      index: 5
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "MOCK"
+        valueType: "com.example.profileservice.repository.ProfileRepository"
+        uuid: "<init>_profileRepository1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      methodExercised:
+        target: "this.profileRepository"
+        name: "deleteById"
+        parameters:
+        - name: "id"
+          value:
+            sapientType: "BASIC"
+            content: !<regular>
+              value: 1
+            suggestedContent: !<regular>
+              value: 1
+            valueType: "java.lang.Integer"
+            uuid: "deleteById_integer1"
+            fixed: false
+            equalsMethodPresent: false
+            explicitCastNeeded: false
+        signature: "deleteById(Integer): void"
+        returnValue:
+          sapientType: "VOID"
+          valueType: "void"
+          uuid: "deleteById_void1"
+          fixed: true
+          equalsMethodPresent: false
+          explicitCastNeeded: false
+        access: 1025
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "FIELD"
+      name: "keycloak"
+      modelFingerprint: "91610D9D5A70F4F637E5F4C5D178431C"
+      index: 6
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "MOCK"
+        valueType: "org.keycloak.admin.client.Keycloak"
+        uuid: "<init>_keycloak1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      methodExercised:
+        target: "this.keycloak"
+        name: "realm"
+        parameters:
+        - name: "realmName"
+          value:
+            sapientType: "BASIC"
+            content: !<regular>
+              value: "test"
+            valueType: "java.lang.String"
+            fixed: true
+            equalsMethodPresent: false
+            explicitCastNeeded: false
+        signature: "realm(String): RealmResource"
+        returnValue:
+          sapientType: "MOCK"
+          valueType: "org.keycloak.admin.client.resource.RealmResource"
+          uuid: "deleteById_realmResource1"
+          fixed: false
+          equalsMethodPresent: false
+          explicitCastNeeded: false
+        access: 1
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "LOCAL_VARIABLE"
+      modelFingerprint: "EC17A7A7BD6822BBCA9D8F7DEC074807"
+      index: 7
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "MOCK"
+        valueType: "org.keycloak.admin.client.resource.RealmResource"
+        uuid: "deleteById_realmResource1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      methodExercised:
+        target: "org.keycloak.admin.client.resource.RealmResource"
+        name: "users"
+        parameters: []
+        signature: "users(): UsersResource"
+        returnValue:
+          sapientType: "MOCK"
+          valueType: "org.keycloak.admin.client.resource.UsersResource"
+          uuid: "deleteById_usersResource1"
+          fixed: false
+          equalsMethodPresent: false
+          explicitCastNeeded: false
+        access: 1025
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "LOCAL_VARIABLE"
+      modelFingerprint: "3155A4FDE47A1B808DF94ADC980CFA06"
+      index: 8
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "MOCK"
+        valueType: "org.keycloak.admin.client.resource.UsersResource"
+        uuid: "deleteById_usersResource1"
+        fixed: false
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      methodExercised:
+        target: "org.keycloak.admin.client.resource.UsersResource"
+        name: "delete"
+        parameters:
+        - name: "arg0"
+          value:
+            sapientType: "BASIC"
+            content: !<regular>
+              value: "return_of_getTokenAttributesItem1Value1"
+            valueType: "java.lang.String"
+            uuid: "deleteById_object1"
+            fixed: false
+            collectionUuid: "deleteById_map1"
+            equalsMethodPresent: false
+            explicitCastNeeded: true
+        signature: "delete(String): Response"
+        returnValue:
+          sapientType: "MOCK"
+          valueType: "javax.ws.rs.core.Response"
+          uuid: "deleteById_response1"
+          fixed: false
+          equalsMethodPresent: false
+          explicitCastNeeded: false
+        access: 1025
+      staticReadMethodForField: false
+      filledByUser: false
+    - type: "RESULT"
+      name: "result"
+      modelFingerprint: "68041019986276EDF5D420282D883A57"
+      index: 9
+      ignored: false
+      nestedInLoop: false
+      nestedInRecursion: false
+      value:
+        sapientType: "VOID"
+        fixed: true
+        equalsMethodPresent: false
+        explicitCastNeeded: false
+      staticReadMethodForField: false
+      filledByUser: false
+    uuid: "e54761ff-ce2d-31a9-8b54-fe6dbfa536d3"
+    deleted: false
+    disabled: false
+    ignoredBySystem: false
+    prover: "DEFAULT"
+    disabledStatusUpdatedByUser: false
+    disabledStatusUpdatedBySystem: false
