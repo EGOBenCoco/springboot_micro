@@ -1,13 +1,17 @@
 /*
 package com.example.profileservice.service;
 
+import com.example.plannerentity.dto.request.ProfileUpdateRequest;
 import com.example.plannerentity.dto.responce.ProfileResponce;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Timeout;
+import com.example.plannerentity.global_exception.CustomException;
+import com.example.profileservice.model.Profile;
+import com.example.profileservice.producer_mq.ProfileProducerMQ;
+import com.example.profileservice.repository.ProfileRepository;
+import com.example.profileservice.service.impl.ProfileServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.RealmResource;
-import com.example.profileservice.model.Profile;
 import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.UserRepresentation;
@@ -15,37 +19,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 
-import java.math.BigDecimal;
-import java.security.Principal;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
-import com.example.plannerentity.global_exception.CustomException;
-
-import javax.ws.rs.core.Response;
-
-import com.example.profileservice.repository.ProfileRepository;
-import org.keycloak.admin.client.Keycloak;
-import com.example.plannerentity.dto.request.ProfileUpdateRequest;
-
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.http.HttpStatus;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
-
-import org.junit.jupiter.api.Disabled;
 
 @ExtendWith(MockitoExtension.class)
 class ProfileServiceSapientGeneratedTest {
@@ -57,11 +41,138 @@ class ProfileServiceSapientGeneratedTest {
     @Mock
     private Keycloak keycloak;
     @Mock
-    private RabbitTemplate rabbitTemplate;
+    ProfileProducerMQ profileProducerMQ;
+    @Mock
+    private JwtAuthenticationToken token;
     @InjectMocks
-    private ProfileService profileService;
+    private ProfileServiceImpl profileServiceImpl;
+    @Test
+    public void testCreateProfile() {
+        // Arrange
+        Profile profile = new Profile();
+        profile.setNickname("testNickname");
+        profile.setAuth_id("testAuthId");
+
+        // Мокирование возвращаемого значения метода getTokenAttributes() как Map
+        Map<String, Object> tokenAttributes = new HashMap<>();
+        tokenAttributes.put("preferred_username", "testNickname");
+        tokenAttributes.put("sub", "testAuthId");
+        when(token.getTokenAttributes()).thenReturn(tokenAttributes);
+
+        // Act
+        profileServiceImpl.createProfile(profile, token);
+
+        // Assert
+        verify(profileRepository, times(1)).save(profile);
+    }
+
+ */
+/*   @Test
+    public void testGetById() {
+        // Создание заглушки Profile
+        Profile profile = new Profile();
+        when(profileRepository.findById(1)).thenReturn(java.util.Optional.of(profile));
+
+        // Создание заглушки ProfileResponce
+        ProfileResponce profileResponce = new ProfileResponce();
+        when(modelMapper.map(profile, ProfileResponce.class)).thenReturn(profileResponce);
+
+        ProfileResponce result = profileServiceImpl.getById(1);
+
+        // Проверка, что результат соответствует ожидаемому значению
+        assertEquals(profileResponce, result);
+    }*//*
+
 
     @Test
+    public void testGetById_ProfileNotFound() {
+        // Arrange
+        int id = 1;
+        // Мокирование поведения ProfileRepository
+        when(profileRepository.findById(id)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(CustomException.class, () -> profileServiceImpl.getById(id));
+    }
+
+    @Test
+    void updateUser_ProfileFound_Success() {
+        String authId = "authId";
+        ProfileUpdateRequest updateRequest = new ProfileUpdateRequest();
+
+        JwtAuthenticationToken jwtToken = mock(JwtAuthenticationToken.class);
+        given(jwtToken.getTokenAttributes()).willReturn(Collections.singletonMap("sub", authId));
+
+        Profile existingProfile = new Profile();
+        existingProfile.setAuth_id(authId);
+
+        RealmResource realmResourceMock = mock(RealmResource.class);
+        UserResource userResourceMock = mock(UserResource.class);
+
+        when(profileRepository.findProfileByAuth_id(authId)).thenReturn(Optional.of(existingProfile));
+        when(keycloak.realm("test")).thenReturn(realmResourceMock);
+        when(realmResourceMock.users()).thenReturn(mock(UsersResource.class));
+        when(realmResourceMock.users().get(authId)).thenReturn(userResourceMock);
+
+        profileServiceImpl.updateUser(updateRequest, jwtToken);
+
+        verify(profileRepository).findProfileByAuth_id(authId);
+        verify(profileRepository).save(existingProfile);
+        verify(userResourceMock).update(any(UserRepresentation.class));
+        verify(profileProducerMQ).sendMessage( any(Profile.class));
+
+    }
+    @Test
+    void updateUser_ProfileNotFound_ExceptionThrown() {
+        String authId = "authId";
+        ProfileUpdateRequest updateRequest = new ProfileUpdateRequest();
+
+        JwtAuthenticationToken jwtToken = mock(JwtAuthenticationToken.class);
+        given(jwtToken.getTokenAttributes()).willReturn(Collections.singletonMap("sub", authId));
+
+        when(profileRepository.findProfileByAuth_id(authId)).thenReturn(Optional.empty());
+
+        // Проверяем, что при вызове метода updateUser с несуществующим профилем будет выброшено исключение RuntimeException
+        assertThrows(RuntimeException.class, () -> profileServiceImpl.updateUser(updateRequest, jwtToken));
+
+        // Проверяем, что методы не были вызваны
+        verify(profileRepository).findProfileByAuth_id(authId);
+        verify(profileRepository, never()).save(any());
+
+    }
+
+
+
+
+
+    @Test
+    public void deleteById_ProfileFound_Success() {
+        // Arrange
+        int id = 1;
+        String authId = "authId";
+        JwtAuthenticationToken jwtToken = mock(JwtAuthenticationToken.class);
+        given(jwtToken.getTokenAttributes()).willReturn(Collections.singletonMap("sub", authId)); // return a map with "sub" attribute
+
+        Profile profile = new Profile();
+        profile.setId(id);
+
+        RealmResource realmResourceMock = mock(RealmResource.class);
+        UsersResource usersResourceMock = mock(UsersResource.class);
+
+        when(keycloak.realm("test")).thenReturn(realmResourceMock); // return the mock RealmResource
+        when(realmResourceMock.users()).thenReturn(usersResourceMock); // assuming users() returns UsersResource
+
+        // Act
+        profileServiceImpl.deleteById(id, jwtToken);
+
+        // Assert
+        verify(profileRepository).deleteById(id);
+        verify(usersResourceMock).delete(authId);
+    }
+
+}
+   */
+/* @Test
     void updateUser_ProfileFound_Success() {
         String authId = "authId";
         ProfileUpdateRequest updateRequest = new ProfileUpdateRequest();
@@ -155,6 +266,7 @@ class ProfileServiceSapientGeneratedTest {
         verify(profileRepository).deleteById(id);
         verify(usersResourceMock).delete(authId);
     }
+*//*
 
-}
+
 */

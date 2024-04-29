@@ -1,10 +1,12 @@
-package com.example.profileservice.service;
+package com.example.profileservice.service.impl;
 
 import com.example.plannerentity.dto.request.ProfileUpdateRequest;
 import com.example.plannerentity.dto.responce.ProfileResponce;
 import com.example.plannerentity.global_exception.CustomException;
 import com.example.profileservice.model.Profile;
+import com.example.profileservice.producer_mq.ProfileProducerMQ;
 import com.example.profileservice.repository.ProfileRepository;
+import com.example.profileservice.service.ProfileService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -12,7 +14,6 @@ import org.keycloak.admin.client.Keycloak;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.modelmapper.ModelMapper;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -20,22 +21,23 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class ProfileService {
+public class ProfileServiceImpl implements ProfileService {
 
     ProfileRepository profileRepository;
     ModelMapper modelMapper;
     Keycloak keycloak;
-    RabbitTemplate rabbitTemplate;
+    ProfileProducerMQ profileProducerMQ;
 
     public void createProfile(Profile profile, Principal principal) {
-        JwtAuthenticationToken token = (JwtAuthenticationToken) principal;
-        String nickname = (String) token.getTokenAttributes().get("preferred_username");
-        String auth_id = (String) token.getTokenAttributes().get("sub");
+        String nickname = getNickname(principal);
+        String auth_id = getAuth_Id(principal);
+        if(profileRepository.existsByAuth_id(auth_id)){
+            throw new CustomException("Profile has already been created",HttpStatus.BAD_REQUEST);
+        }
         profile.setNickname(nickname);
         profile.setAuth_id(auth_id);
         profileRepository.save(profile);
@@ -47,35 +49,29 @@ public class ProfileService {
     }
 
     public void updateUser(ProfileUpdateRequest user, Principal principal) {
-
-        JwtAuthenticationToken token = (JwtAuthenticationToken) principal;
-        String auth_id = (String) token.getTokenAttributes().get("sub");
+        String auth_id = getAuth_Id(principal);
         profileRepository.findProfileByAuth_id(auth_id).ifPresentOrElse(consumer ->
         {
-            consumer.setNickname(user.getNickname());
-            consumer.setBio(user.getBio());
-            profileRepository.save(consumer);
+            consumer.setNickname(user.nickname());
+            consumer.setBio(user.bio());
             UserRepresentation userRep = mapUserRep(user);
             keycloak.realm("test").users().get(auth_id).update(userRep);
-            rabbitTemplate.convertAndSend("topic_exchange", "for.post", consumer);
+            profileRepository.save(consumer);
+            profileProducerMQ.sendMessage(consumer);
         }, () -> {
             throw new RuntimeException("Consumer not found");
         });
     }
 
     public void deleteById(int id,Principal principal){
-        JwtAuthenticationToken token = (JwtAuthenticationToken) principal;
-        String auth_id = (String) token.getTokenAttributes().get("sub");
+        String auth_id = getAuth_Id(principal);
         profileRepository.deleteById(id);
         keycloak.realm("test").users().delete(auth_id);
     }
-
-
-
     private UserRepresentation mapUserRep(ProfileUpdateRequest user) {
         UserRepresentation userRep = new UserRepresentation();
         //userRep.setId(user.getAuth_id());
-        userRep.setUsername(user.getNickname());
+        userRep.setUsername(user.nickname());
         userRep.setEnabled(true);
         userRep.setEmailVerified(true);
         List<CredentialRepresentation> creds = new ArrayList<>();
@@ -85,6 +81,13 @@ public class ProfileService {
         userRep.setCredentials(creds);
         return userRep;
     }
+    private String getAuth_Id(Principal principal){
+        JwtAuthenticationToken token = (JwtAuthenticationToken) principal;
+        return (String) token.getTokenAttributes().get("sub");
+    }
 
-
+    private String getNickname(Principal principal){
+        JwtAuthenticationToken token = (JwtAuthenticationToken) principal;
+        return (String) token.getTokenAttributes().get("preferred_username");
+    }
 }

@@ -1,7 +1,8 @@
-package com.example.notificationservice.service;
+package com.example.notificationservice.service.impl;
 
 
-import com.example.plannerentity.dto.responce.SubscriberEmailRequest;
+import com.example.notificationservice.service.NotificationService;
+import com.example.plannerentity.dto.request.SubscriberEmailRequest;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -20,9 +21,9 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true)
-public class NotificationService {
+public class NotificationServiceImpl implements NotificationService {
 
-    private static final Logger logger = LoggerFactory.getLogger(NotificationService.class);
+    private static final Logger logger = LoggerFactory.getLogger(NotificationServiceImpl.class);
 
     public String sendTextEmail(SubscriberEmailRequest sender) throws IOException {
         Email from = new Email("kkasanov92@gmail.com");

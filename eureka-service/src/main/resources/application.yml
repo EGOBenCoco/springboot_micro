@@ -3,7 +3,8 @@ spring:
     name: eureka-service
   config:
     import: configserver:http://localhost:8888
-
+  profiles:
+    active: monitor
 eureka:
   client:
     register-with-eureka: false

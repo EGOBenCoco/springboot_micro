@@ -2,13 +2,22 @@ spring:
   application:
     name: notification-service
   config:
-    import: configserver:http://localhost:8888
-
+    import: configserver:${CONFIG_SERVER_URL:http://localhost:8888}
+  profiles:
+    active: monitor
   rabbitmq:
-    host: localhost
+    host: localhost  #rabbitmq.default.svc.cluster.local
     port: 5672
-    username: guest
-    password: guest
+    username: guest #user
+    password: guest #password
+    listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 3s
+          max-attempts: 6
+          max-interval: 10s
+          multiplier: 2
 server:
-  port: 8081
+  port: 8086
 

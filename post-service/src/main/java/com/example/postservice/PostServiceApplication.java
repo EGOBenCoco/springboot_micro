@@ -23,6 +23,10 @@ public class PostServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PostServiceApplication.class, args);
+
+        String ulr = "https://s3.eu-north-1.amazonaws.com/benedigto-bucket/post/dd6718ce-24e1-4bc4-bccd-32410c47eab8/Снимок.PNG";
+        String fileName = ulr.substring(ulr.lastIndexOf("/") + 1);
+        System.out.println(fileName);
     }
     @Bean
     public ModelMapper modelMapper() {

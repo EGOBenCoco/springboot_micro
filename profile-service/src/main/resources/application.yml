@@ -2,27 +2,15 @@ spring:
   application:
     name: profile-service
   config:
-    import: configserver:http://localhost:8888
+    import: configserver:${CONFIG_SERVER_URL:http://localhost:8888} #configserver:http://localhost:8888
+  profiles:
+    active: monitor,general
 
-  security:
-    basic:
-      enabled: false
-    ignored: /**
-    oauth2:
-      client:
-        registration:
-          keycloak:
-            provider: my-provider
-            client-id: x
-            client-secret: wFVyBi2Jw3ZfyNOnQ79G9m6h4Zn8j6wf
-            authorization-grant-type: authorization_code
-        provider:
-          my-provider:
-            issuer-uri: http://localhost:8080/realms/test
-            jwk-set-uri: http://localhost:8080/realms/test/protocol/openid-connect/certs
-
-jwt:
-  secret: BvPHGM8C0ia4uOuxxqPD5DTbWC9F9TWvPStp3pb7ARo0oK2mJ3pd3YG4lxA9i8bj6OTbadwezxgeEByY
-  auth:
-    converter:
-      resource-id: x
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://microservices-db.cvgyimgky69h.eu-north-1.rds.amazonaws.com:5432/profile-service?serverTimezone=UTC&createDatabaseIfNotExist=true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    user: postgres
+    password: 7L6aX8jfG4
+    baseline-version: 0

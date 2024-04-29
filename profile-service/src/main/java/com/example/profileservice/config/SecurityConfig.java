@@ -22,7 +22,7 @@ public class SecurityConfig {
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests()
-                .requestMatchers("/profiles/{id}").hasRole("USER")
+                .requestMatchers("/profiles/{id}").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .oauth2ResourceServer(oAuth2ResourceServerSpec ->

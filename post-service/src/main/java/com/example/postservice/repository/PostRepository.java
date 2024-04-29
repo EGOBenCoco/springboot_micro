@@ -1,5 +1,6 @@
 package com.example.postservice.repository;
 
+import com.example.plannerentity.dto.responce.PostResponce;
 import com.example.plannerentity.enums.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +18,7 @@ import java.util.Optional;
 public interface PostRepository extends JpaRepository<Post,Integer> {
 
     @Query("SELECT p FROM Post p WHERE p.category= :nickname ")
-    Page<Post> findByNickname(@Param("nickname") String nickname, Pageable pageable);
+    Page<Post> findAllByNickname(@Param("nickname") String nickname, Pageable pageable);
     @Query("select p from Post p where p.accountId =:id")
     Page<Post> findAllByAccountId(@Param("id") int id,Pageable pageable);
     @Query("select p from Post p where p.accountId =:id")
@@ -26,6 +27,7 @@ public interface PostRepository extends JpaRepository<Post,Integer> {
     Page<Post> findAllPost(Pageable pageable);
     @Query("SELECT p FROM Post p WHERE p.category= :category ")
     Page<Post> findByCategory(@Param("category") Category category, Pageable pageable);
+    @Query("SELECT p FROM Post p WHERE p.name= :name ")
+    Page<Post> findAllByName(@Param("name") String name, Pageable pageable);
 
-    Post deletePostById(int id);
 }

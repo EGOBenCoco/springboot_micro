@@ -1,11 +1,11 @@
 package com.example.subscriberservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,7 +16,12 @@ public class Subscriber {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    int subscriberId;
-    int profileId;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "subscriber_profile_ids", joinColumns = @JoinColumn(name = "subscriber_id"))
+    @Column(name = "profile_id")
+    List<Integer> profileId = new ArrayList<>();;
     String subscriberEmail;
+
+
 }

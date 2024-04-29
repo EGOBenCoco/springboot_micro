@@ -11,7 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
 public class Profile {
 
     @Id
@@ -21,4 +20,10 @@ public class Profile {
     String bio;
     String auth_id;
     BigDecimal countSubscriber;
+
+    @OneToMany(mappedBy = "profile",cascade = {CascadeType.PERSIST,CascadeType.REMOVE},fetch = FetchType.EAGER)
+    List<Link> links;
+    public Profile() {
+        this.countSubscriber = BigDecimal.ZERO;
+    }
 }

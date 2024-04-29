@@ -13,22 +13,12 @@ import org.springframework.context.annotation.ComponentScan;
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true)
 @ComponentScan(basePackages = {"com.example.plannerentity","com.example.notificationservice"})
-//@EnableJpaRepositories(basePackages = {"com.example.notificationservice"})
-//@EntityScan(basePackages = {"com.example.plannerentity.notif"})
 @Slf4j
 public class NotificationServiceApplication {
-   //   NotificationService notificationService;
-
-
     public static void main(String[] args) {
         SpringApplication.run(NotificationServiceApplication.class, args);
     }
 
-/*    @RabbitListener(queues = "notification")
-    public void consumer(PostEmailRecordDTO postEmailRecordDTO) throws IOException {
-        log.info("Consumed {} from queue", postEmailRecordDTO.emailTo());
-        notificationService.sendTextEmail(postEmailRecordDTO);
-    }*/
 
 
 

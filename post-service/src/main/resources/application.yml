@@ -2,32 +2,32 @@ spring:
   application:
     name: post-service
   config:
-    import: configserver:http://localhost:8888
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-  security:
-    basic:
-      enabled: false
-    ignored: /**
-    oauth2:
-      client:
-        registration:
-          keycloak:
-            provider: my-provider
-            client-id: x
-            client-secret: wFVyBi2Jw3ZfyNOnQ79G9m6h4Zn8j6wf
-            authorization-grant-type: authorization_code
-        provider:
-          my-provider:
-            token-uri: http://localhost:8080/realms/test/protocol/openid-connect/token
-            issuer-uri: http://localhost:8080/realms/test
-            jwk-set-uri: http://localhost:8080/realms/test/protocol/openid-connect/certs
+    import: configserver:${CONFIG_SERVER_URL:http://localhost:8888}
+  profiles:
+    active: monitor,general
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
-jwt:
-  secret: BvPHGM8C0ia4uOuxxqPD5DTbWC9F9TWvPStp3pb7ARo0oK2mJ3pd3YG4lxA9i8bj6OTbadwezxgeEByY
-  auth:
-    converter:
-      resource-id: x
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://microservices-db.cvgyimgky69h.eu-north-1.rds.amazonaws.com:5432/post-service?serverTimezone=UTC&createDatabaseIfNotExist=true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    user: postgres
+    password: 7L6aX8jfG4
+    baseline-version: 0
+
+
+s3:
+  endpointUrl: https://s3.eu-north-1.amazonaws.com #https://s3.amazonaws.com
+  accessKeyId: AKIAXFASNBMFJDAN6DEW  #AKIAXFASNBMFIHPPHW53
+  secretKey: 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  #plTYxqRHcLGIvN0eX+iQQUGLq/eGwJCXdTxeWv2j
+  bucketName: benedigto-bucket
+  region: eu-north-1
+
+
+
+
+
