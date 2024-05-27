@@ -96,8 +96,6 @@ jobs:
       - name: Set up Helm
         run: |
           curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-
-        with:
-          args:  helm upgrade --install env ./helm-deploy/env
+          helm upgrade --install env ./helm-deploy/env
       
 
