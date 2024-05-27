@@ -101,7 +101,12 @@ jobs:
         with:
           args:  get nodes
 
-      - name: Install Helm chart
+      - name: Deploy to GKE using Helm
         run: |
-               helm install env ./helm-deploy/env --kubeconfig $HOME/.kube/config
+            helm upgrade --install env ./helm-deploy/env 
+          env:
+            PROJECT_ID: ${{ env.PROJECT_ID }}
+            GKE_CLUSTER: ${{ env.GKE_CLUSTER }}
+            GKE_ZONE: ${{ env.GKE_ZONE }}
+ 
 
