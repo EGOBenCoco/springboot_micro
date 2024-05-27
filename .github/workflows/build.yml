@@ -5,7 +5,10 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_CLUSTER: devo2
+  GKE_ZONE: us-central1-c
 jobs:
   build:
 
@@ -87,11 +90,13 @@ jobs:
         run: |
           curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
+      - name: Configure kubectl
+        uses: ameydev/gke-kubectl-action@master
         env:
-          PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+          PROJECT_ID: ${{ env.PROJECT_ID }}
           APPLICATION_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
-          CLUSTER_NAME: ${{ secrets.GKE_CLUSTER_NAME }}
-          ZONE_NAME: ${{ env.GKE_LOCATION }}
+          CLUSTER_NAME: ${{ secrets.GKE_PROJECT }}
+          ZONE_NAME: ${{ env.GKE_ZONE }}
       - name: Deploy with Helm
         run: |
             helm upgrade --install env ./helm-deploy/env
