@@ -73,3 +73,18 @@ jobs:
           docker push egokirill/config-service:latest
           docker push egokirill/notification-service:latest
           docker push egokirill/subscriber-service:latest
+
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GKE_PROJECT }}
+          service_account_key: ${{ secrets.GKE_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Deploy to GKE
+        run: |
+          gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_LOCATION }}
+          cd helm-deploy/env
+          helm install env .
+
