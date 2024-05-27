@@ -102,5 +102,12 @@ jobs:
           args:  install env ./helm-deploy/env
 
 
-      
+      - name: Set up Helm context
+        run: |
+            gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }} --project ${{ env.PROJECT_ID }}
+            kubectl config use-context gke_${{ env.PROJECT_ID }}_${{ env.GKE_ZONE }}_${{ env.GKE_CLUSTER }}
+
+      - name: Install Helm chart
+        run: |
+               helm install env ./helm-deploy/env
 
