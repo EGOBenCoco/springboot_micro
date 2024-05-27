@@ -26,6 +26,7 @@ public class NotificationServiceImpl implements NotificationService {
     SendGrid sendGrid;
     private static final Logger logger = LoggerFactory.getLogger(NotificationServiceImpl.class);
 
+
     public void sendTextEmail(SubscriberEmailRequest sender){
         Email from = new Email("kkasanov92@gmail.com");
         String subject = sender.subject();

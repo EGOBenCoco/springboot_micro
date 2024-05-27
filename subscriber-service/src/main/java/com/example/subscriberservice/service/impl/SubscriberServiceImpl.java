@@ -19,12 +19,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpStatusCodeException;
 
-import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,7 +55,8 @@ public class SubscriberServiceImpl implements SubscriberService {
         if (subscriberRepository.existsBySubscriberEmailAndProfileId(email, profileId)) {
             throw new IllegalArgumentException("Subscription has already been created");
         }
-        List<Integer> existingProfileIds = existingSubscriber.getProfileId();
+        List<Integer> existingProfileIds = new ArrayList<>(existingSubscriber.getProfileId());
+        //  List<Integer> existingProfileIds = existingSubscriber.getProfileId();
         existingProfileIds.add(profileId);
         existingSubscriber.setProfileId(existingProfileIds);
         subscriberRepository.save(existingSubscriber);
