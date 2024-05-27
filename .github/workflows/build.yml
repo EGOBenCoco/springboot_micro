@@ -98,6 +98,12 @@ jobs:
         run: |
           curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
+      - name: Configure Helm
+        run: |
+            # Установка подключения к текущему кластеру GKE
+            gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }}
+          
+
       - name: Deploy with Helm
         run: |
             helm upgrade --install env ./helm-deploy/env
