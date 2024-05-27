@@ -99,7 +99,7 @@ jobs:
           CLUSTER_NAME: ${{ env.GKE_CLUSTER }}
           ZONE_NAME: ${{ env.GKE_ZONE }}
         with:
-          args:  install env ./helm-deploy/env
+          args:  get nodes
 
 
       - name: Set up Helm context
