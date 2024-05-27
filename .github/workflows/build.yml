@@ -101,7 +101,6 @@ jobs:
         with:
           args:  get nodes
 
-
       - name: Set up Helm context
         run: |
             gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }} --project ${{ env.PROJECT_ID }}
