@@ -75,40 +75,27 @@ jobs:
           docker push egokirill/subscriber-service:latest
 
 
+
   Deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Set up Kubernetes
-        uses: azure/setup-kubectl@v1
-        with:
-          version: 'v1.21.0' # Версию kubectl можно изменить на нужную вам
-
-      - name: Install gke-gcloud-auth-plugin
+      - name: Set up Helm
         run: |
-          sudo apt-get update
-          sudo apt-get install -y google-cloud-cli-gke-gcloud-auth-plugin
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
-      - name: Authenticate to GKE
-        uses: google-github-actions/auth@v0.4.0
-        with:
-          credentials_json: ${{ secrets.GKE_SA_KEY }}
-
-      - name: Set GKE context
-        run: |
-          gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_LOCATION }} --project ${{ secrets.GKE_PROJECT }}
-
-      - name: Setup Helm
-        uses: azure/setup-helm@v1
-        with:
-          version: 'v3.5.4' # Версию Helm можно изменить на нужную вам
-
-      # Применение Helm charts
+      - name: Configure kubectl
+        uses: ameydev/gke-kubectl-action@master
+        env:
+          PROJECT_ID: ${{ env.PROJECT_ID }}
+          APPLICATION_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
+          CLUSTER_NAME: ${{ env.GKE_CLUSTER }}
+          ZONE_NAME: ${{ env.GKE_ZONE }}
       - name: Deploy with Helm
         run: |
-          helm upgrade --install env ./helm-deploy/env
-  
+            helm upgrade --install env ./helm-deploy/env
       
 
