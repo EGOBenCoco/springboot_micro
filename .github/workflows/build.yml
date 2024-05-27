@@ -75,22 +75,39 @@ jobs:
           docker push egokirill/subscriber-service:latest
 
 
-      - name: Аутентификация в Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1
-        with:
-          credentials: ${{ secrets.GCP_SA_KEY }}
+  Deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
 
-      - name: Настройка Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1
+      # Установка Google Cloud SDK
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
         with:
-          project_id: ${{ secrets.GKE_PROJECT }}
-          skip_install: true
           version: 'latest'
+        env:
+          PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+          APPLICATION_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
 
-      - name: Развертывание в GKE
+      # Аутентификация с помощью сервисного аккаунта
+      - name: Authenticate to GCP
+        run: gcloud auth activate-service-account --key-file=${{ secrets.GKE_SA_KEY }}
+
+      # Установка Helm
+      - name: Install Helm
         run: |
-          gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_LOCATION }}
-          cd helm-deploy/env
-          helm install env .
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+      # Настройка GKE cluster
+      - name: Set up GKE cluster
+        run: |
+          gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_LOCATION }} --project ${{ secrets.GKE_PROJECT }}
+
+      # Применение Helm charts
+      - name: Deploy with Helm
+        run: |
+          helm upgrade --install env ./helm-deploy/env
+  
       
 
