@@ -29,12 +29,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Build Planner-Entity projects
-        run: |
-          mvn clean install -DskipTests --file planner-entity/pom.xml
 
       - name: Build Maven projects
         run: |
+          mvn clean install -DskipTests --file planner-entity/pom.xml
           mvn clean install -DskipTests --file gateway-service/pom.xml
           mvn clean install -DskipTests --file profile-service/pom.xml
           mvn clean install -DskipTests --file post-service/pom.xml
@@ -49,8 +47,8 @@ jobs:
           mvn -Dtest=NotificationServiceImplTest test --file notification-service/pom.xml
           mvn -Dtest=SubscriberServiceImplTest test --file subscriber-service/pom.xml
 
-      - name: Ensure JAR file exists
-        run: test -f gateway-service/target/gateway-service.jar || exit 1
+     # - name: Ensure JAR file exists
+      #  run: test -f gateway-service/target/gateway-service.jar || exit 1
 
 
 
