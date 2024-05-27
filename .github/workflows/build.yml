@@ -95,13 +95,8 @@ jobs:
           CLUSTER_NAME: ${{ env.GKE_CLUSTER }}
           ZONE_NAME: ${{ env.GKE_ZONE }}
 
-      - name: Copy kubeconfig for Helm
+      - name: Deploy using Helm
         run: |
-            mkdir -p ~/.kube
-            cp $HOME/.kube/config ~/.kube/config
-
-            - name: Deploy using Helm
-              run: |
-                helm install my-release ./path/to/chart
+          helm upgrade --install env ./helm-deploy/env
       
 
