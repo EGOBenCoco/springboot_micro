@@ -35,7 +35,6 @@ jobs:
 
       - name: Build Maven projects
         run: |
-          
           mvn clean install -DskipTests --file gateway-service/pom.xml
           mvn clean install -DskipTests --file profile-service/pom.xml
           mvn clean install -DskipTests --file post-service/pom.xml
