@@ -94,15 +94,14 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
           CLUSTER_NAME: ${{ env.GKE_CLUSTER }}
           ZONE_NAME: ${{ env.GKE_ZONE }}
-      - name: Set up Helm
-        run: |
-          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
-      - name: Initialize Helm
-        run: helm init --client-only
-
-      - name: Deploy with Helm
+      - name: Copy kubeconfig for Helm
         run: |
-            helm upgrade --install env ./helm-deploy/env
+            mkdir -p ~/.kube
+            cp $HOME/.kube/config ~/.kube/config
+
+            - name: Deploy using Helm
+              run: |
+                helm install my-release ./path/to/chart
       
 
