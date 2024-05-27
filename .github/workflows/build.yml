@@ -99,13 +99,8 @@ jobs:
           CLUSTER_NAME: ${{ env.GKE_CLUSTER }}
           ZONE_NAME: ${{ env.GKE_ZONE }}
         with:
-          args:  get nodes
+          args:  install env ./helm-deploy/env
 
-      - name: Install Helm chart
-        run: |
-                  helm repo add stable https://charts.helm.sh/stable
-                  helm repo update
-          helm install env ./helm-deploy/env
 
       
 
