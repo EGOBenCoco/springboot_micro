@@ -81,28 +81,24 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      # Установка Google Cloud SDK
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@master
+      - name: Set up Kubernetes
+        uses: azure/setup-kubectl@v1
         with:
-          version: 'latest'
-        env:
-          PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-          APPLICATION_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
+          version: 'v1.21.0' # Версию kubectl можно изменить на нужную вам
 
-      # Аутентификация с помощью сервисного аккаунта
-      - name: Authenticate to GCP
-        run: gcloud auth activate-service-account --key-file=${{ secrets.GKE_SA_KEY }}
+      - name: Authenticate to GKE
+        uses: google-github-actions/auth@v0.4.0
+        with:
+          credentials_json: ${{ secrets.GKE_SA_KEY }}
 
-      # Установка Helm
-      - name: Install Helm
-        run: |
-          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-
-      # Настройка GKE cluster
-      - name: Set up GKE cluster
+      - name: Set GKE context
         run: |
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_LOCATION }} --project ${{ secrets.GKE_PROJECT }}
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: 'v3.5.4' # Версию Helm можно изменить на нужную вам
 
       # Применение Helm charts
       - name: Deploy with Helm
