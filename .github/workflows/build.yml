@@ -101,7 +101,7 @@ jobs:
       - name: Deploy to GKE using Helm
         run: |
             helm upgrade --install env ./helm-deploy/env 
-          env:
+        env:
             PROJECT_ID: ${{ env.PROJECT_ID }}
             GKE_CLUSTER: ${{ env.GKE_CLUSTER }}
             GKE_ZONE: ${{ env.GKE_ZONE }}
