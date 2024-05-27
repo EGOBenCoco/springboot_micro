@@ -94,7 +94,12 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
           CLUSTER_NAME: ${{ env.GKE_CLUSTER }}
           ZONE_NAME: ${{ env.GKE_ZONE }}
-        with:
-         args: helm upgrade --install env ./helm-deploy/env
+      - name: Set up Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+      - name: Deploy with Helm
+        run: |
+            helm upgrade --install env ./helm-deploy/env
       
 
