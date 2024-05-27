@@ -29,14 +29,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Run Unit tests
-        run: |
-          mvn clean install -DskipTests --file planner-entity/pom.xml
-          mvn -Dtest=ProfileServiceTest test --file profile-service/pom.xml
-          mvn -Dtest=PostServiceImplTest test --file post-service/pom.xml
-          mvn -Dtest=NotificationServiceImplTest test --file notification-service/pom.xml
-          mvn -Dtest=SubscriberServiceImplTest test --file subscriber-service/pom.xml
-
+      
 
       - name: Build Maven projects
         run: |
@@ -47,6 +40,13 @@ jobs:
           mvn clean install -DskipTests --file config-service/pom.xml
           mvn clean install -DskipTests --file notification-service/pom.xml
           mvn clean install -DskipTests --file subscriber-service/pom.xml
+
+      - name: Run Unit tests
+        run: |
+          mvn -Dtest=ProfileServiceTest test --file profile-service/pom.xml
+          mvn -Dtest=PostServiceImplTest test --file post-service/pom.xml
+          mvn -Dtest=NotificationServiceImplTest test --file notification-service/pom.xml
+          mvn -Dtest=SubscriberServiceImplTest test --file subscriber-service/pom.xml
 
       - name: Ensure JAR file exists
         run: test -f gateway-service/target/gateway-service.jar || exit 1
