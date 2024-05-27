@@ -86,6 +86,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@master
 
+      - name: Set up Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
 
       - name: Configure kubectl
         uses: ameydev/gke-kubectl-action@master
@@ -95,16 +99,8 @@ jobs:
           CLUSTER_NAME: ${{ env.GKE_CLUSTER }}
           ZONE_NAME: ${{ env.GKE_ZONE }}
         with:
-          args: get nodes
-      - name: Verify kubectl configuration
-        run: kubectl get nodes
+          args: upgrade --install env ./helm-deploy/env
 
-      - name: Set up Helm
-        run: |
-          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
-      - name: Deploy with Helm
-        run: |
-            helm upgrade --install env ./helm-deploy/env
       
 
