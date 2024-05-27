@@ -94,7 +94,8 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
           CLUSTER_NAME: ${{ env.GKE_CLUSTER }}
           ZONE_NAME: ${{ env.GKE_ZONE }}
-
+        with:
+          args: get nodes
       - name: Verify kubectl configuration
         run: kubectl get nodes
 
