@@ -98,10 +98,14 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
           CLUSTER_NAME: ${{ env.GKE_CLUSTER }}
           ZONE_NAME: ${{ env.GKE_ZONE }}
-      - name: Display KUBECONFIG file path
-        run: |
-            echo "KUBECONFIG file path: $KUBECONFIG"
+        with:
+          args:  get nodes
 
+      - name: Install Helm chart
+        run: |
+                  helm repo add stable https://charts.helm.sh/stable
+                  helm repo update
+          helm install env ./helm-deploy/env
 
       
 
