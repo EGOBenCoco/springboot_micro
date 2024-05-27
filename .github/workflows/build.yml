@@ -29,11 +29,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      
+      - name: Build Planner-Entity projects
+        run: |
+          mvn clean install -DskipTests --file planner-entity/pom.xml
 
       - name: Build Maven projects
         run: |
-          mvn clean install -DskipTests --file planner-entity/pom.xml
+          
           mvn clean install -DskipTests --file gateway-service/pom.xml
           mvn clean install -DskipTests --file profile-service/pom.xml
           mvn clean install -DskipTests --file post-service/pom.xml
