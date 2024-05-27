@@ -1,0 +1,22 @@
+spring:
+  rabbitmq:
+    host:  rabbitmq.default.svc.cluster.local
+  port: 5672
+  username: user
+  password: password
+  listener:
+    simple:
+      retry:
+        enabled: true
+        initial-interval: 3s
+        max-attempts: 6
+        max-interval: 10s
+        multiplier: 2
+
+
+server:
+  port: 8086
+
+
+SENDGRID_API_INTEGRATION_ENABLED: true
+SENDGRID_API_KEY: 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

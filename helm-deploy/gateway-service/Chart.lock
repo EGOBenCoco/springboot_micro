@@ -1,0 +1,6 @@
+dependencies:
+- name: common-deploy
+  repository: file://.././common-deploy
+  version: 0.1.0
+digest: sha256:31e2eebc592f75f223fd4dd1270a998e05ac1434bf6b462b213f0c7f70547271
+generated: "2024-04-22T21:47:33.1027541+03:00"

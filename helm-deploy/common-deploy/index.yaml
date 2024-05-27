@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  ms-common:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-04-21T16:05:07.3717755+03:00"
+    description: A Helm chart for Kubernetes
+    digest: 3505a252fd4c86159f833e1daa5b0e78798cdfd26f9c375edda127de19cda3d9
+    name: ms-common
+    type: application
+    urls:
+    - ms-common-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-04-21T16:05:07.3705913+03:00"

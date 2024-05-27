@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: subscriber-service
+  config:
+    import: configserver:${CONFIG_SERVER_URL:http://localhost:8888}
+  profiles:
+    active: monitor,general
+
+
+
+

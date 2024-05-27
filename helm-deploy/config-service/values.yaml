@@ -1,0 +1,23 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+deploymentName: config-deployment
+deploymentLabel: config-deployment
+appName: config-service
+serviceName: config-server-svc
+replicaCount: 1
+
+image:
+  repository: egokirill/config-service
+  tag: latest
+  imagePullPolicy: IfNotPresent
+
+#containerPort: 8080
+
+service:
+  type: ClusterIP
+  port: 8888
+  targetPort: 8888
+
+config_enabled: false
+postgresql_enabled: false

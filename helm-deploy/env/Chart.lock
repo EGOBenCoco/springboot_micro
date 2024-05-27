@@ -1,0 +1,24 @@
+dependencies:
+- name: common-deploy
+  repository: file://.././common-deploy
+  version: 0.1.0
+- name: config-service
+  repository: file://.././config-service
+  version: 0.1.0
+- name: profile-service
+  repository: file://.././profile-service
+  version: 0.1.0
+- name: subscriber-service
+  repository: file://.././subscriber-service
+  version: 0.1.0
+- name: notification-service
+  repository: file://.././notification-service
+  version: 0.1.0
+- name: post-service
+  repository: file://.././post-service
+  version: 0.1.0
+- name: gateway-service
+  repository: file://.././gateway-service
+  version: 0.1.0
+digest: sha256:b118246d37d56f8144cf4955d309001b3a5d4e0aa5bfa54f122a7e905e705390
+generated: "2024-05-20T15:03:06.1187948+03:00"

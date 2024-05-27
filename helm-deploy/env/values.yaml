@@ -1,0 +1,6 @@
+global:
+  configMapName: postapp-configmap
+  configServerURL: "http://config-server-svc"
+  host: "postgres"
+  username: "postgres"
+  password: "postgres"

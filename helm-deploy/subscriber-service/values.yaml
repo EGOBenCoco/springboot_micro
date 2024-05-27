@@ -1,0 +1,23 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+deploymentName: subscriber-deployment
+deploymentLabel: subscriber-deployment
+appName: subscriber-service
+serviceName: subscriber-service
+replicaCount: 1
+
+image:
+  repository: egokirill/subscriber-service
+  tag: latest
+  imagePullPolicy: IfNotPresent
+
+#containerPort: 8080
+
+service:
+  type: ClusterIP
+  port: 8085
+  targetPort: 8085
+
+config_enabled: true
+postgresql_enabled: true

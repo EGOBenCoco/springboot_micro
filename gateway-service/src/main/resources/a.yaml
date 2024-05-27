@@ -1,0 +1,46 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      default:
+        filters:
+          TokenRelay=
+      routes:
+        - id: notifications
+          uri: lb://notification-service    #http://notification-service
+          predicates:
+            - Path=/api/v1/notifications/**
+        - id: profiles
+          uri: lb://profile-service  #http://profile-service
+          predicates:
+            - Path=/api/v1/profiles/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: ClientCircuitBreaker
+                fallbackUri: forward:/fallback/api/v1/profiles
+        - id: profiles-controller2
+          uri: lb://profile-service   #http://profile-service
+          predicates:
+            - Path=/api/v1/links/**
+        - id: post
+          uri: lb:// post-service  #http://post-service
+          predicates:
+            - Path=/api/v1/posts/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: ClientCircuitBreaker
+                fallbackUri: forward:/fallback/api/v1/posts
+        - id: subscriber
+          uri: lb://subscriber-service  #http://subscriber-service
+          predicates:
+            - Path=/api/v1/subscribers/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: ClientCircuitBreaker
+                fallbackUri: forward:/fallback/api/v1/subscribers

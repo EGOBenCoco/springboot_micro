@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-server-app
+spec:
+  selector:
+    matchLabels:
+      app: config-server-app
+  template:
+    metadata:
+      labels:
+        app: config-server-app
+    spec:
+      containers:
+        - name: config-server-app
+          image: egokirill/config-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8888

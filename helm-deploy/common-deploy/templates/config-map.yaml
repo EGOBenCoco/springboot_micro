@@ -1,0 +1,11 @@
+{{- define "common.configmap" -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.global.configMapName }}
+data:
+  CONFIG_SERVER_URL: "{{ .Values.global.configServerURL }}"
+  DB_HOST: "{{ .Values.global.host }}"
+  POSTGRES_USER: "{{ .Values.global.username }}"
+  POSTGRES_PASSWORD: "{{ .Values.global.password }}"
+{{- end -}}
