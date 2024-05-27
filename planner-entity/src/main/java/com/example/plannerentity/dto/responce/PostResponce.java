@@ -4,6 +4,7 @@ import com.example.plannerentity.enums.Category;
 import lombok.Data;
 
 @Data
+
 public class PostResponce {
 
     int id;

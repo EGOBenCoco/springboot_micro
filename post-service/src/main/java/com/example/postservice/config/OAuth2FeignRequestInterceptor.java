@@ -12,10 +12,8 @@ public class OAuth2FeignRequestInterceptor implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate template) {
-        // Получаем текущий аутентификационный объект из контекста безопасности
         JwtAuthenticationToken authentication = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.getToken() != null) {
-            // Получаем токен и добавляем его в заголовок запроса
             String token = authentication.getToken().getTokenValue();
             template.header(AUTHORIZATION_HEADER, String.format("%s %s", TOKEN_TYPE, token));
         }

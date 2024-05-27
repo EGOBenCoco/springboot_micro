@@ -6,11 +6,5 @@ spring:
   profiles:
     active: monitor,general
 
-  flyway:
-    enabled: true
-    url: jdbc:postgresql://microservices-db.cvgyimgky69h.eu-north-1.rds.amazonaws.com:5432/profile-service?serverTimezone=UTC&createDatabaseIfNotExist=true
-    locations: classpath:db/migration
-    baseline-on-migrate: true
-    user: postgres
-    password: 7L6aX8jfG4
-    baseline-version: 0
+
+

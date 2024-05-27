@@ -13,31 +13,18 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.messaging.converter.MessageConversionException;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
+@Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 public class ProducerSubscriber {
 
     RabbitTemplate rabbitTemplate;
     private static final Logger logger = LoggerFactory.getLogger(ProducerSubscriber.class);
-
-    public void publishEmailMessage(PostSubscriberMessage message){
-        try {
-            var emailDTO = new SubscriberEmailRequest(
-                    message.getEmailSubscriber(),
-                    "Wet Grapes",
-                    "New post by " + message.getAuthorName() + "Name Post" + message.getPostTitle());
-            rabbitTemplate.convertAndSend(GeneralVariables.EXCHANGE, GeneralVariables.NOTIFICATION_KEY, emailDTO);
-        }
-        catch (AmqpException | MessageConversionException e) {
-            logger.error("Error publishing email message", e);
-        }
-    }
-
     public void publishCountSubscriber(int profileId, boolean increment) {
         try {
             Map<String, Object> message = new HashMap<>();

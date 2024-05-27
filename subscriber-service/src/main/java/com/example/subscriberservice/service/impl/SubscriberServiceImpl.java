@@ -11,12 +11,20 @@ import com.example.subscriberservice.service.SubscriberService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpStatusCodeException;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,13 +36,13 @@ public class SubscriberServiceImpl implements SubscriberService {
     ProducerSubscriber producerSubscriber;
     ProfileClient client;
 
-    public void createNewSubscriber(int profileId, Principal principal) {
-        String email = getEmail(principal);
-        String auth_id = getAuth_Id(principal);
+    public void createNewSubscriber(int profileId) {
+        String email = getTokenAttribute("email");
+        String auth_id = getTokenAttribute("sub");
         ProfileResponce profileResponce = client.getById(profileId);
         if (auth_id.equals(profileResponce.getAuth_id()) ||
                 subscriberRepository.existsBySubscriberEmailAndProfileId(email, profileId)) {
-            throw new CustomException("Подписка невозможна", HttpStatus.BAD_REQUEST);
+            throw new CustomException("Subscription is not possible", HttpStatus.BAD_REQUEST);
         }
         Subscriber newSubscriber = new Subscriber();
         newSubscriber.setSubscriberEmail(email);
@@ -43,12 +51,12 @@ public class SubscriberServiceImpl implements SubscriberService {
         subscriberRepository.save(newSubscriber);
     }
 
-    public void addSubscriptionToExistingSubscriber(int profileId, Principal principal) {
-        String email = getEmail(principal);
+    public void addSubscriptionToExistingSubscriber(int profileId) {
+        String email = getTokenAttribute("email");
         Subscriber existingSubscriber = subscriberRepository.findBySubscriberEmail(email).orElseThrow(
                 () -> new CustomException("Not found", HttpStatus.NOT_FOUND));
         if (subscriberRepository.existsBySubscriberEmailAndProfileId(email, profileId)) {
-            throw new IllegalArgumentException("Подписка уже создана");
+            throw new IllegalArgumentException("Subscription has already been created");
         }
         List<Integer> existingProfileIds = existingSubscriber.getProfileId();
         existingProfileIds.add(profileId);
@@ -58,31 +66,43 @@ public class SubscriberServiceImpl implements SubscriberService {
 
     }
 
-    public List<SubscriberResponce> getSubscriberSubscriptions(int subscriberId) {
-        return subscriberRepository.findById(subscriberId)
-                .stream()
-                .flatMap(subscriber -> subscriber.getProfileId().stream()
-                        .map(profileId -> {
-                            ProfileResponce profile = client.getById(profileId);
-                            return new SubscriberResponce(subscriber.getId(), profile.getId(), profile.getNickname());
-                        })
-                )
+
+    public Page<SubscriberResponce> getSubscriberSubscriptions(int subscriberId, int page, int size) {
+        Page<Subscriber> subscriberPage = subscriberRepository.findById(subscriberId, PageRequest.of(page, size));
+        List<SubscriberResponce> subscriberResponces = subscriberPage.getContent().stream()
+                .map(profileId -> {
+                    ProfileResponce profile = client.getById(profileId.getId());
+                    return new SubscriberResponce(subscriberId, profile.getId(), profile.getNickname());
+                })
                 .collect(Collectors.toList());
+        return new PageImpl<>(subscriberResponces, subscriberPage.getPageable(), subscriberPage.getTotalElements());
     }
+
+
+
+/*    public List<SubscriberResponce> getSubscriberSubscriptions(int subscriberId) {
+        Optional<Subscriber> subscriberOptional = subscriberRepository.findById(subscriberId);
+
+        if (subscriberOptional.isPresent()) {
+            return subscriberOptional.get().getProfileId().stream()
+                    .map(profileId -> {
+                        ProfileResponce profile = client.getById(profileId);
+                        return new SubscriberResponce(subscriberId, profile.getId(), profile.getNickname());
+                    })
+                    .collect(Collectors.toList());
+        } else {
+            throw new CustomException("Not found",HttpStatus.NOT_FOUND);
+        }
+    }*/
 
     public void unsubscribe(int subscriberId, int profileId) {
         subscriberRepository.deleteById(subscriberId);
         producerSubscriber.publishCountSubscriber(profileId, false);
     }
 
-
-    private String getAuth_Id(Principal principal){
-        JwtAuthenticationToken token = (JwtAuthenticationToken) principal;
-        return (String) token.getTokenAttributes().get("sub");
-    }
-
-    private String getEmail(Principal principal){
-        JwtAuthenticationToken token = (JwtAuthenticationToken) principal;
-        return (String) token.getTokenAttributes().get("email");
+    private String getTokenAttribute(String arg) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        JwtAuthenticationToken token = (JwtAuthenticationToken) authentication;
+        return (String) token.getTokenAttributes().get(arg);
     }
 }

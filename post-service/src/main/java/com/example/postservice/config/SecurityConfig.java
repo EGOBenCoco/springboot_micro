@@ -18,11 +18,15 @@ public class SecurityConfig {
     @Value("${spring.security.oauth2.client.provider.my-provider.issuer-uri}")
     private String issuerUri;
     private final JwtAuthConverter jwtAuthConverter;
+    private static final String url = "/api/v1/posts";
+
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests()
-                .anyRequest().permitAll()
+                .requestMatchers(url +
+                        "/{post-id}/add-photo",
+                        "/{post-id}/delete-photo").authenticated()
                 .and()
                 .oauth2ResourceServer(oAuth2ResourceServerSpec ->
                         oAuth2ResourceServerSpec.jwt(jwtSpec -> jwtSpec.jwtAuthenticationConverter(jwtAuthConverter)));

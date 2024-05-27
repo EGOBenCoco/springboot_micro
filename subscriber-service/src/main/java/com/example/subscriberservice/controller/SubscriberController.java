@@ -5,6 +5,7 @@ import com.example.plannerentity.global_exception.SuccessMessage;
 import com.example.subscriberservice.service.SubscriberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +22,9 @@ import java.util.List;
 public class SubscriberController {
 
     private final SubscriberService subscriberService;
-
-
-
-    @PostMapping("/subscribe/{profileId}")
-    public ResponseEntity<Object> subscribe( @PathVariable int profileId, Principal principal) {
-        subscriberService.createNewSubscriber( profileId,principal);
+    @PostMapping("/{profileId}/subscribe")
+    public ResponseEntity<Object> subscribe( @PathVariable int profileId) {
+        subscriberService.createNewSubscriber( profileId);
         return ResponseEntity.ok(SuccessMessage.builder()
                 .status(HttpStatus.CREATED.value())
                 .message("Subscribe added")
@@ -34,10 +32,9 @@ public class SubscriberController {
                 .build());
     }
 
-
-    @PostMapping("/add/{profileId}")
-    public ResponseEntity<Object> addNew( @PathVariable int profileId,Principal principal) {
-        subscriberService.addSubscriptionToExistingSubscriber( profileId,principal);
+    @PostMapping("/{profileId}/profile")
+    public ResponseEntity<Object> addNew( @PathVariable int profileId) {
+        subscriberService.addSubscriptionToExistingSubscriber( profileId);
         return ResponseEntity.ok(SuccessMessage.builder()
                 .status(HttpStatus.CREATED.value())
                 .message("Subscribe added")
@@ -46,10 +43,11 @@ public class SubscriberController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<SubscriberResponce>> getSubscriptionsBySubscriberId(@PathVariable int id) {
-        return ResponseEntity.ok(subscriberService.getSubscriberSubscriptions(id));
+    public ResponseEntity<Page<SubscriberResponce>> getSubscriptionsBySubscriberId(@PathVariable int id,
+                                                                                   @RequestParam(name = "page", defaultValue = "0") int page,
+                                                                                   @RequestParam(name = "size", defaultValue = "10") int size) {
+        return ResponseEntity.ok(subscriberService.getSubscriberSubscriptions(id,page,size));
     }
-
 
     @DeleteMapping("/{profileId}/{subscriberId}")
     public ResponseEntity<Object> unsubscribe(@PathVariable int subscriberId, @PathVariable int profileId){

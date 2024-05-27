@@ -29,11 +29,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: Run Unit tests
+        run: |
+          mvn -Dtest=ProfileServiceTest test --file profile-service/pom.xml
+          mvn -Dtest=PostServiceImplTest test --file post-service/pom.xml
+          mvn -Dtest=NotificationServiceImplTest test --file notification-service/pom.xml
+          mvn -Dtest=SubscriberServiceImplTest test --file subscriber-service/pom.xml
+
+
       - name: Build Maven projects
         run: |
           mvn clean install -DskipTests --file planner-entity/pom.xml
           mvn clean install -DskipTests --file gateway-service/pom.xml
-          mvn clean install -DskipTests --file eureka-service/pom.xml
           mvn clean install -DskipTests --file profile-service/pom.xml
           mvn clean install -DskipTests --file post-service/pom.xml
           mvn clean install -DskipTests --file config-service/pom.xml
@@ -53,7 +60,6 @@ jobs:
       - name: Build and push Docker images
         run: |
           docker build -t egokirill/gateway-service:latest ./gateway-service
-          docker build -t egokirill/eureka-service:latest ./eureka-service
           docker build -t egokirill/profile-service:latest ./profile-service
           docker build -t egokirill/post-service:latest ./post-service
           docker build -t egokirill/config-service:latest ./config-service
@@ -61,7 +67,6 @@ jobs:
           docker build -t egokirill/subscriber-service:latest ./subscriber-service
           
           docker push egokirill/gateway-service:latest
-          docker push egokirill/eureka-service:latest
           docker push egokirill/profile-service:latest
           docker push egokirill/post-service:latest
           docker push egokirill/config-service:latest

@@ -22,8 +22,7 @@ public class SecurityConfig {
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests()
-                .requestMatchers("/subscribers/subscribe/{profileId}/{subscriberId}").hasRole("USER")
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .oauth2ResourceServer(oAuth2ResourceServerSpec ->
                         oAuth2ResourceServerSpec.jwt(jwtSpec -> jwtSpec.jwtAuthenticationConverter(jwtAuthConverter)));

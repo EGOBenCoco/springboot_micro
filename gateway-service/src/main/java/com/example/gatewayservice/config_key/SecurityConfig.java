@@ -20,6 +20,8 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final JwtAuthConverter jwtAuthConverter;
+    private static final String postsUrl = "/api/v1/posts";
+    private static final String profileUrl = "/api/v1/profiles";
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
@@ -27,7 +29,15 @@ public class SecurityConfig {
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchange ->
                         exchange
-                               // .pathMatchers("/customers/test/two").permitAll()
+                                .pathMatchers("/api/v1/profiles"
+                                        , "/api/v1/profiles/{id}"
+                                        , "/api/v1/profiles/{nickname}"
+                                        , "/api/v1/posts/{id}"
+                                        , "/api/v1/posts/sort"
+                                        , "/api/v1/posts/all"
+                                        , "/api/v1/posts/{name}/by-name"
+                                        , "/api/v1/posts/{nickname}/profile"
+                                        ).permitAll()
                                 .anyExchange()
                                 .authenticated())
                 .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec.jwt(jwtSpec ->

@@ -2,10 +2,14 @@ package com.example.plannerentity.dto.request;
 
 import com.example.plannerentity.enums.Category;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-public record PostUpdateRequest(   int id,
-        String name,
-        String content,
-        Category category) {
-
+@Getter
+@Setter
+public class PostUpdateRequest {
+    int id;
+    String name;
+    String content;
+    Category category;
 }

@@ -1,7 +1,7 @@
 package com.example.subscriberservice;
 
 
-import com.example.subscriberservice.client.OAuth2FeignRequestInterceptor;
+import com.example.subscriberservice.config.OAuth2FeignRequestInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = {"com.example.plannerentity","com.example.subscriberservice"})
 @EnableJpaRepositories(basePackages = {"com.example.subscriberservice"})
 @EnableFeignClients
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 public class SubcscriberServiceApplication {
 
 	public static void main(String[] args) {

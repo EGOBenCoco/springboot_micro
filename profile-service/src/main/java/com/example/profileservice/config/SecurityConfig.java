@@ -18,12 +18,12 @@ public class SecurityConfig {
     @Value("${spring.security.oauth2.client.provider.my-provider.issuer-uri}")
     private String issuerUri;
     private final JwtAuthConverter jwtAuthConverter;
+    private String url = "/api/v1/profiles";
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests()
-                .requestMatchers("/profiles/{id}").permitAll()
-                .anyRequest().permitAll()
+                .requestMatchers("/api/v1/profiles/update-password").authenticated()
                 .and()
                 .oauth2ResourceServer(oAuth2ResourceServerSpec ->
                         oAuth2ResourceServerSpec.jwt(jwtSpec -> jwtSpec.jwtAuthenticationConverter(jwtAuthConverter)));

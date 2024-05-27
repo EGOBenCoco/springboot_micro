@@ -9,7 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true)
 @ComponentScan(basePackages = {"com.example.plannerentity","com.example.notificationservice"})

@@ -5,8 +5,6 @@ import com.example.plannerentity.dto.request.ProfileUpdateRequest;
 import com.example.plannerentity.global_exception.ListenerException;
 import com.example.postservice.model.Post;
 import com.example.postservice.repository.PostRepository;
-import com.example.postservice.service.PostService;
-import com.example.postservice.service.impl.PostServiceImpl;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -14,6 +12,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
@@ -21,13 +20,17 @@ import java.util.List;
 public class PostConsumerMQ {
     PostRepository postRepository;
     @RabbitListener(queues = GeneralVariables.QUEUE_POST)
-    public void updateNickName(ProfileUpdateRequest profileUpdateRequest) throws ListenerException {
-        List<Post> posts = postRepository.findAllByAccountId(profileUpdateRequest.id());
+    public void updateNickName(Map<String, Object> message) throws ListenerException {
+        int profileId = (int) message.get("profileId");
+        String nickname = (String) message.get("nickname");
+        List<Post> posts = postRepository.findAllByAccountId(profileId);
         if (posts.isEmpty()) {
             throw new ListenerException("Profile empty ");
         }
-        posts.forEach(post -> post.setNickname(profileUpdateRequest.nickname()));
+        posts.forEach(post -> post.setAuthor(nickname));
         postRepository.saveAll(posts);
-        };
+        }
+
+
     }
 

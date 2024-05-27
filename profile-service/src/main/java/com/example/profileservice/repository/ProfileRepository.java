@@ -16,6 +16,8 @@ public interface ProfileRepository extends JpaRepository<Profile,Integer> {
     @Query( "SELECT CASE WHEN COUNT(p) > 0 THEN true ELSE false END FROM Profile p WHERE p.auth_id = :authId")
     boolean existsByAuth_id(String authId);
 
+    Optional<Profile> findByNickname(String nickname);
+
    /* @Query("SELECT p.auth_id FROM Profile p WHERE p.auth_id= :authId")
     String findByAuth_id(String authId);*/
 

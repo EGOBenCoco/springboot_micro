@@ -1,6 +1,19 @@
 version: "3.7"
 
 services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:19.0.0
+    command: start-dev
+    environment:
+      KC_LOG_LEVEL: info
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: 1
+    volumes:
+      - ./target/eventListener-1.0-SNAPSHOT.jar:/opt/keycloak/providers/eventListener-1.0-SNAPSHOT.jar
+
+    ports:
+      - 8080:8080
+
   postgresql:
     image: postgres
     volumes:
@@ -10,6 +23,3 @@ services:
       - POSTGRES_PASSWORD=qwerty
     ports:
       - 5433:5432
-
-
-

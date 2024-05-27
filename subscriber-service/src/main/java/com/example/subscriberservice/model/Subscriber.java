@@ -20,7 +20,8 @@ public class Subscriber {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "subscriber_profile_ids", joinColumns = @JoinColumn(name = "subscriber_id"))
     @Column(name = "profile_id")
-    List<Integer> profileId = new ArrayList<>();;
+    List<Integer> profileId = new ArrayList<>();
+
     String subscriberEmail;
 
 

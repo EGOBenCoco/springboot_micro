@@ -1,5 +1,6 @@
 package com.example.postservice.controller;
 
+import com.example.plannerentity.dto.request.PostCreatedRequest;
 import com.example.plannerentity.dto.request.PostUpdateRequest;
 import com.example.plannerentity.dto.responce.PostResponce;
 import com.example.plannerentity.enums.Category;
@@ -26,7 +27,7 @@ public class PostController {
 
     PostService postService;
 
-    @PostMapping("/add-photo/{post-id}")
+    @PostMapping("/{post-id}/add-photo")
     public ResponseEntity<Object> addPhotosToEntityById(
             @PathVariable("post-id") int entityId,
             @RequestParam("files") List<MultipartFile> file
@@ -43,34 +44,26 @@ public class PostController {
     @GetMapping("/{id}")
     public ResponseEntity<Post> getById(@PathVariable int id) {
         return ResponseEntity.ok(postService.getById(id));
-
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Page<PostResponce>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
+    public ResponseEntity<Page<Post>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
                                                       @RequestParam(name = "size", defaultValue = "10") int size) {
         return ResponseEntity.ok(postService.findAll(page, size));
     }
 
-    @GetMapping("/{nickname}/consumer")
-    public ResponseEntity<Page<PostResponce>> getByConsumerId(@PathVariable String nickname,
+    @GetMapping("/{nickname}/profile")
+    public ResponseEntity<Page<Post>> getByConsumerId(@PathVariable String nickname,
                                                               @RequestParam(name = "page", defaultValue = "0") int page,
                                                               @RequestParam(name = "size", defaultValue = "10") int size) {
         return ResponseEntity.ok(postService.getByNickname(nickname, page, size));
     }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<Page<PostResponce>> getByName(@PathVariable String name,
+    @GetMapping("/{name}/by-name")
+    public ResponseEntity<Page<Post>> getByName(@PathVariable String name,
                                                         @RequestParam(name = "page", defaultValue = "0") int page,
                                                         @RequestParam(name = "size", defaultValue = "10") int size) {
         return ResponseEntity.ok(postService.getByNickname(name, page, size));
-    }
-
-    @GetMapping("/{accountId}/consumer")
-    public ResponseEntity<Page<PostResponce>> getByAccountId(@PathVariable int accountId,
-                                                             @RequestParam(name = "page", defaultValue = "0") int page,
-                                                             @RequestParam(name = "size", defaultValue = "10") int size) {
-        return ResponseEntity.ok(postService.getByAccountId(accountId, page, size));
     }
 
     @PutMapping("/{id}")
@@ -84,7 +77,7 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> create(@RequestBody Post post) {
+    public ResponseEntity<Object> create(@RequestBody PostCreatedRequest post) {
         postService.createPost(post);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(SuccessMessage.builder()
@@ -95,7 +88,7 @@ public class PostController {
     }
 
     @GetMapping("/sort")
-    public ResponseEntity<Page<PostResponce>> getByCategory(@RequestParam("category") Category category,
+    public ResponseEntity<Page<Post>> getByCategory(@RequestParam("category") Category category,
                                                             @RequestParam(name = "page", defaultValue = "0") int page,
                                                             @RequestParam(name = "size", defaultValue = "10") int size) {
         return ResponseEntity.ok(postService.findByCategory(category, page, size));
@@ -106,12 +99,12 @@ public class PostController {
         postService.deleteById(id);
         return ResponseEntity.ok(SuccessMessage.builder()
                 .status(HttpStatus.OK.value())
-                .message("Announcement deleted")
+                .message("Post deleted")
                 .datetime(LocalDateTime.now())
                 .build());
     }
 
-    @DeleteMapping("/delete-photo/{post-id}")
+    @DeleteMapping("/{post-id}/delete-photo")
     public ResponseEntity<Object> deletePhotoFromEntityById(
             @PathVariable("post-id") int announcementId,
             @RequestParam("photo-url") String photoUrl
