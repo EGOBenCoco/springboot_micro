@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 public class SuccessMessage {
 
+
     private int status;
     private String message;
     private LocalDateTime datetime;
