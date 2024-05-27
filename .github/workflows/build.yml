@@ -101,7 +101,6 @@ jobs:
         with:
           args:  get nodes
 
-
       - name: Install Helm chart
         run: |
                   helm repo add stable https://charts.helm.sh/stable
