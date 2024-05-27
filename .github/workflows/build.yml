@@ -88,7 +88,8 @@ jobs:
 
       - name: Install gke-gcloud-auth-plugin
         run: |
-          gcloud components install gke-gcloud-auth-plugin
+          sudo apt-get update
+          sudo apt-get install -y google-cloud-cli-gke-gcloud-auth-plugin
 
       - name: Authenticate to GKE
         uses: google-github-actions/auth@v0.4.0
