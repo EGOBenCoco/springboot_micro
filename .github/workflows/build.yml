@@ -89,16 +89,17 @@ jobs:
 
       - name: Install kubectl
         run: |
+          sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+          echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+          echo "deb [signed-by=/usr/share/keyrings/cloud_google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo tee /usr/share/keyrings/cloud.google.gpg
           sudo apt-get update
-          sudo apt-get install -y apt-transport-https ca-certificates curl
-          sudo curl -fsSLo /usr/share/keyrings/cloud.google.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-          echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-          sudo apt-get update
-          sudo apt-get install -y google-cloud-sdk kubectl google-cloud-sdk-gke-gcloud-auth-plugin
-      
-      
-      
-      
+          sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
+          sudo apt-get install kubectl
+
+
+
+          
 
       - name: Install Helm
         run: |
