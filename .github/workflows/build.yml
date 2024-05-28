@@ -114,12 +114,13 @@ jobs:
 
       - name: Deploy with Helm
         env:
-          GCLOUD_KEY: ${{ secrets.GKE_SA_KEY }}
+          GCLOUD_KEY: ${{ secrets.GKE_SA_KEY3 }}
         run: |
           echo "$GCLOUD_KEY" | base64 --decode > ${HOME}/gcloud.json
           gcloud auth activate-service-account --key-file=${HOME}/gcloud.json
           export USE_GKE_GCLOUD_AUTH_PLUGIN=True
           gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --region ${{ env.GKE_ZONE }} --project ${{ env.PROJECT_ID }}
+          kubectl cluster-info
           helm upgrade --install env ./helm-deploy/env
  
 
