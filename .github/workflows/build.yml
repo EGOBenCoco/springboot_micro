@@ -86,10 +86,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@master
 
-      #- name: Set up Helm
-       # run: |
-        #  curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-
 
       - name: Configure kubectl
         uses: ameydev/gke-kubectl-action@master
@@ -105,6 +101,8 @@ jobs:
             exec -l $SHELL
             gcloud init
             gcloud components install google-cloud-sdk-gke-gcloud-auth-plugin
+            gcloud components install kubectl
+            gcloud components install kubectl-credential-gke
           
 
       - name: Install Helm
