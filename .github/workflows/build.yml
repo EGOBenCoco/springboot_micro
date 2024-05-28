@@ -33,15 +33,15 @@ jobs:
             ${{ runner.os }}-maven-
 
 
-      - name: Build Maven projects
-        run: |
-          mvn clean install -DskipTests --file planner-entity/pom.xml
-          mvn clean install -DskipTests --file gateway-service/pom.xml
-          mvn clean install -DskipTests --file profile-service/pom.xml
-          mvn clean install -DskipTests --file post-service/pom.xml
-          mvn clean install -DskipTests --file config-service/pom.xml
-          mvn clean install -DskipTests --file notification-service/pom.xml
-          mvn clean install -DskipTests --file subscriber-service/pom.xml
+     # - name: Build Maven projects
+      #  run: |
+       #   mvn clean install -DskipTests --file planner-entity/pom.xml
+        #  mvn clean install -DskipTests --file gateway-service/pom.xml
+         # mvn clean install -DskipTests --file profile-service/pom.xml
+          #mvn clean install -DskipTests --file post-service/pom.xml
+          #mvn clean install -DskipTests --file config-service/pom.xml
+          #mvn clean install -DskipTests --file notification-service/pom.xml
+          #mvn clean install -DskipTests --file subscriber-service/pom.xml
 
      # - name: Run Unit tests
       #  run: |
@@ -109,7 +109,11 @@ jobs:
 
       - name: Install Helm
         run: |
-                curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+            curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+      - name: Save GKE service account key
+        run: |
+                echo "${{ secrets.GKE_SA_KEY }}" | base64 --decode > ${HOME}/gcloud.json
 
       - name: Configure kubectl with GKE credentials
         run: |
@@ -120,9 +124,8 @@ jobs:
 
       - name: Deploy with Helm
         run: |
-          helm upgrade --install env ./helm-deploy/env
+                helm upgrade --install env ./helm-deploy/env
         env:
-                GCLOUD_KEY: ${{ secrets.GKE_SA_KEY }}
                 PROJECT_ID: ${{ env.PROJECT_ID }}
                 GKE_CLUSTER: ${{ env.GKE_CLUSTER }}
                 GKE_ZONE: ${{ env.GKE_ZONE }}
