@@ -111,7 +111,6 @@ jobs:
            chmod 700 get_helm.sh
            ./get_helm.sh
 
-
       - name: Deploy with Helm
         env:
           GCLOUD_KEY: ${{ secrets.GKE_SA_KEY3 }}
