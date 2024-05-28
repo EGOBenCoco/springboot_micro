@@ -100,13 +100,12 @@ jobs:
           ZONE_NAME: ${{ env.GKE_ZONE }}
 
       - name: Install And Deploy With Helm
-        uses: hahow/install-helm-chart-action@v3
-        with:
-          gcloud_auth_key: ${{ secrets.GKE_SA_KEY2 }}
-          gcloud_project_id: ${{ secrets.GKE_PROJECT }}
-          cluster_name: ${{ secrets.GKE_CLUSTER_NAME }}
-          cluster_region: us-central1-c
-          chart_name: ./helm-deploy/env
+        uses: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+        env:
+          PROJECT_ID: ${{ env.PROJECT_ID }}
+          APPLICATION_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
+          CLUSTER_NAME: ${{ env.GKE_CLUSTER }}
+          ZONE_NAME: ${{ env.GKE_ZONE }}
             helm upgrade --install env ./helm-deploy/env
       #  run: |
        #     helm upgrade --install env ./helm-deploy/env
