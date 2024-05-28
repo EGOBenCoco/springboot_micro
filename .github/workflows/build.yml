@@ -100,7 +100,7 @@ jobs:
           ZONE_NAME: ${{ env.GKE_ZONE }}
 
       - name: Install And Deploy With Helm
-        uses: hahow/install-helm-chart-action@v1
+        uses: hahow/install-helm-chart-action@v3
         with:
           gcloud_auth_key: ${{ secrets.GKE_SA_KEY2 }}
           gcloud_project_id: ${{ secrets.GKE_PROJECT }}
