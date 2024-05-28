@@ -33,15 +33,15 @@ jobs:
             ${{ runner.os }}-maven-
 
 
-     # - name: Build Maven projects
-      #  run: |
-       #   mvn clean install -DskipTests --file planner-entity/pom.xml
-        #  mvn clean install -DskipTests --file gateway-service/pom.xml
-         # mvn clean install -DskipTests --file profile-service/pom.xml
-          #mvn clean install -DskipTests --file post-service/pom.xml
-          #mvn clean install -DskipTests --file config-service/pom.xml
-          #mvn clean install -DskipTests --file notification-service/pom.xml
-          #mvn clean install -DskipTests --file subscriber-service/pom.xml
+      - name: Build Maven projects
+        run: |
+          mvn clean install -DskipTests --file planner-entity/pom.xml
+          mvn clean install -DskipTests --file gateway-service/pom.xml
+          mvn clean install -DskipTests --file profile-service/pom.xml
+          mvn clean install -DskipTests --file post-service/pom.xml
+          mvn clean install -DskipTests --file config-service/pom.xml
+          mvn clean install -DskipTests --file notification-service/pom.xml
+          mvn clean install -DskipTests --file subscriber-service/pom.xml
 
      # - name: Run Unit tests
       #  run: |
