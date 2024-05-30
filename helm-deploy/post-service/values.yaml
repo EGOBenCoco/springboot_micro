@@ -2,7 +2,7 @@
 # Declare variables to be passed into your templates.
 
 deploymentName: post-deployment
-deploymentLabel: post-deployment
+deploymentLabel: post
 appName: post-service
 serviceName: post-service
 replicaCount: 1
@@ -10,7 +10,7 @@ replicaCount: 1
 image:
   repository: egokirill/post-service
   tag: latest
-  imagePullPolicy: IfNotPresent
+  imagePullPolicy: Always
 
 #containerPort: 8080
 
@@ -21,3 +21,5 @@ service:
 
 config_enabled: true
 postgresql_enabled: true
+sendgrid_enabled: true
+aws_enabled: true

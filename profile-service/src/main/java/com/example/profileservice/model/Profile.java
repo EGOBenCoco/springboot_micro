@@ -17,11 +17,8 @@ public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-
-
     @ColumnTransformer(write = "LOWER(?)")
     String nickname;
-
     @Size(min = 8, max = 10,message = "The size should vary from 8 to 100")
     String bio;
     String auth_id;

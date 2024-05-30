@@ -2,9 +2,9 @@
 # Declare variables to be passed into your templates.
 
 deploymentName: notification-deployment
-deploymentLabel: notification-deployment
+deploymentLabel: notification
 appName: notification-service
-serviceName: notification-server-svc
+serviceName: notification-service
 replicaCount: 1
 
 image:
@@ -21,3 +21,5 @@ service:
 
 config_enabled: true
 postgresql_enabled: false
+sendgrid_enabled: true
+aws_enabled: false

@@ -2,15 +2,15 @@
 # Declare variables to be passed into your templates.
 
 deploymentName: config-deployment
-deploymentLabel: config-deployment
+deploymentLabel: config
 appName: config-service
-serviceName: config-server-svc
+serviceName: config-service
 replicaCount: 1
 
 image:
   repository: egokirill/config-service
   tag: latest
-  imagePullPolicy: IfNotPresent
+  imagePullPolicy: Always
 
 #containerPort: 8080
 
@@ -21,3 +21,4 @@ service:
 
 config_enabled: false
 postgresql_enabled: false
+aws_enabled: false

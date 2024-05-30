@@ -20,16 +20,15 @@ spec:
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.imagePullPolicy }}
           ports:
-            - containerPort: {{.Values.service.port}}
-
+            - containerPort: {{ .Values.service.port }}
           env:
           {{- if .Values.config_enabled }}
             - name: CONFIG_SERVER_URL
               valueFrom:
-                  configMapKeyRef:
-                    name: {{ .Values.global.configMapName }}
-                    key: CONFIG_SERVER_URL
-        {{- end }}
+                configMapKeyRef:
+                  name: {{ .Values.global.configMapName }}
+                  key: CONFIG_SERVER_URL
+          {{- end }}
           {{- if .Values.postgresql_enabled }}
             - name: DB_HOST
               valueFrom:
@@ -47,4 +46,38 @@ spec:
                   name: postgres-credentials
                   key: postgres_password
           {{- end }}
-      {{- end }}
+          {{- if .Values.sendgrid_enabled }}
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: sendgrid-secret
+                  key: api-key
+          {{- end }}
+          {{- if .Values.aws_enabled }}
+            - name: ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: aws-s3
+                  key: endpointUrl
+            - name: KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-s3
+                  key: accessKeyId
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-s3
+                  key: secretKey
+            - name: BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: aws-s3
+                  key: bucketName
+            - name: REGION
+              valueFrom:
+                secretKeyRef:
+                  name: aws-s3
+                  key: region
+          {{- end }}
+{{- end }}

@@ -2,15 +2,15 @@
 # Declare variables to be passed into your templates.
 
 deploymentName: gateway-deployment
-deploymentLabel: gateway-deployment
+deploymentLabel: gateway
 appName: gateway-service
-serviceName: gateway-server
+serviceName: gateway-service
 replicaCount: 1
 
 image:
   repository: egokirill/gateway-service
   tag: latest
-  imagePullPolicy: IfNotPresent
+  imagePullPolicy: Always
 
 #containerPort: 8080
 
@@ -21,3 +21,4 @@ service:
 
 config_enabled: true
 postgresql_enabled: false
+aws_enabled: false
