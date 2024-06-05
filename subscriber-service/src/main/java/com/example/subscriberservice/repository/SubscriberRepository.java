@@ -16,5 +16,6 @@ public interface SubscriberRepository  extends JpaRepository<Subscriber,Integer>
     List<Subscriber> findAllByProfileId(int id);
     Page<Subscriber> findById(int subscriberId, Pageable pageable);
     Optional<Subscriber> findBySubscriberEmail(String email);
+    @Query("SELECT CASE WHEN COUNT(e) > 0 THEN true ELSE false END FROM Subscriber e WHERE e.subscriberEmail = :subscriberEmail AND e.profileId = :profileId")
     boolean existsBySubscriberEmailAndProfileId(String subscriberEmail, Integer profileId);
 }

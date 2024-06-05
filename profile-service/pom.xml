@@ -91,7 +91,6 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-resource-server</artifactId>
-            <version>6.2.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -105,12 +104,6 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>6.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-admin-client</artifactId>
-            <version>15.0.2</version>
         </dependency>
 
         <!--    <dependency>
@@ -132,11 +125,7 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+
 
         <dependency>
             <groupId>org.mockito</groupId>
@@ -144,11 +133,7 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy</artifactId>
-            <scope>test</scope>
-        </dependency>
+
 
         <dependency>
             <groupId>org.mockito</groupId>

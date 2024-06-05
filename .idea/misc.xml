@@ -30,6 +30,7 @@
         <option value="$PROJECT_DIR$/blog-service/pom.xml" />
         <option value="$PROJECT_DIR$/booking-service/pom.xml" />
         <option value="$PROJECT_DIR$/flight-service/pom.xml" />
+        <option value="$PROJECT_DIR$/follower-service/pom.xml" />
         <option value="$PROJECT_DIR$/task-service/pom.xml" />
       </set>
     </option>
