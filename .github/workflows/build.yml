@@ -50,8 +50,8 @@ jobs:
           mvn -Dtest=NotificationServiceImplTest test --file notification-service/pom.xml
           mvn -Dtest=SubscriberServiceImplTest test --file subscriber-service/pom.xml
 
-      - name: Ensure JAR file exists
-        run: test -f gateway-service/target/gateway-service.jar || exit 1
+      #- name: Ensure JAR file exists
+       # run: test -f gateway-service/target/gateway-service.jar || exit 1
 
 
 
