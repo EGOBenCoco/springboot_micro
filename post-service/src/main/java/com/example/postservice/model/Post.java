@@ -27,7 +27,7 @@ public class Post {
     int id;
 
 
-    int accountId;
+    int profileId;
 
     @NotEmpty(message = "Name is required")
     String name;
