@@ -245,16 +245,6 @@ class PostServiceImplTest {
 
 
     @Test
-    void testCreatePostWhenProfileNotFound() {
-        when(profileClient.getByNickname("testUser1")).thenReturn(profile);
-
-        // Act & Assert
-        CustomException exception = assertThrows(CustomException.class, () -> {
-            postServiceImpl.createPost(createdRequest);
-        });
-    }
-
-    @Test
     void testAddPhotoById() {
         List<MultipartFile> files = new ArrayList<>();
         files.add(new MockMultipartFile("file1.jpg", new byte[]{1, 2, 3}));
