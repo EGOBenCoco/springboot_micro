@@ -1,6 +1,6 @@
 CREATE TABLE Post (
     id SERIAL PRIMARY KEY,
-    account_Id INT ,
+    profile_Id INT ,
     name VARCHAR ,
     content TEXT ,
     author VARCHAR ,

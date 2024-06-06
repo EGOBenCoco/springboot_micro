@@ -4,7 +4,6 @@ import com.example.plannerentity.dto.request.ProfileCreatedRequest;
 import com.example.plannerentity.dto.request.ProfileUpdateRequest;
 import com.example.plannerentity.dto.responce.ProfileResponce;
 import com.example.plannerentity.global_exception.SuccessMessage;
-import com.example.profileservice.model.Profile;
 import com.example.profileservice.service.ProfileService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -57,7 +56,7 @@ public class ProfileController {
 
     @PutMapping
     public ResponseEntity<Object> changeUsername(@RequestBody ProfileUpdateRequest updateRequest){
-        profileService.updateUser(updateRequest);
+        profileService.updateProfile(updateRequest);
         return ResponseEntity.ok(SuccessMessage.builder()
                 .status(HttpStatus.OK.value())
                 .message("Profile updated")

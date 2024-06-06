@@ -1,5 +1,3 @@
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
 
 deploymentName: config-deployment
 deploymentLabel: config
@@ -12,13 +10,13 @@ image:
   tag: latest
   imagePullPolicy: Always
 
-#containerPort: 8080
 
 service:
   type: ClusterIP
   port: 8888
   targetPort: 8888
 
+git_env: true
 config_enabled: false
 postgresql_enabled: false
 aws_enabled: false

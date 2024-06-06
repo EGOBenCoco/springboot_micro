@@ -7,7 +7,6 @@ import com.example.plannerentity.global_exception.CustomException;
 import com.example.profileservice.model.Profile;
 import com.example.profileservice.producer_mq.ProfileProducerMQ;
 import com.example.profileservice.repository.ProfileRepository;
-import com.example.profileservice.service.impl.ProfileServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -60,7 +59,6 @@ class ProfileServiceTest {
 
     private ProfileCreatedRequest profileCreatedRequest;
 
-    private ProfileUpdateRequest profileUpdateRequest;
     private Profile profile;
 
 
@@ -136,7 +134,7 @@ class ProfileServiceTest {
         // Mock Keycloak and other behavior if necessary
 
         // Act
-        profileServiceImpl.updateUser(updateRequest);
+        profileServiceImpl.updateProfile(updateRequest);
 
         // Assert
         verify(profileRepository).save(existingProfile);
@@ -152,7 +150,7 @@ class ProfileServiceTest {
         when(profileRepository.findProfileByAuth_id(anyString())).thenReturn(Optional.empty());
 
         // Act & Assert
-        assertThrows(CustomException.class, () -> profileServiceImpl.updateUser(updateRequest));
+        assertThrows(CustomException.class, () -> profileServiceImpl.updateProfile(updateRequest));
     }
 
 

@@ -1,5 +1,3 @@
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
 
 deploymentName: gateway-deployment
 deploymentLabel: gateway
@@ -11,8 +9,6 @@ image:
   repository: egokirill/gateway-service
   tag: latest
   imagePullPolicy: Always
-
-#containerPort: 8080
 
 service:
   type: LoadBalancer

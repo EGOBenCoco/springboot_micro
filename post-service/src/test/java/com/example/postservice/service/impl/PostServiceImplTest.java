@@ -26,6 +26,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -58,10 +59,8 @@ class PostServiceImplTest {
     private ProfileClient profileClient;
     @Mock
     S3FileService s3FileService;
-
     @Mock
     private Authentication authentication;
-
     @Mock
     private JwtAuthenticationToken jwtAuthenticationToken;
     @InjectMocks
@@ -246,6 +245,16 @@ class PostServiceImplTest {
 
 
     @Test
+    void testCreatePostWhenProfileNotFound() {
+        when(profileClient.getByNickname("testUser1")).thenReturn(profile);
+
+        // Act & Assert
+        CustomException exception = assertThrows(CustomException.class, () -> {
+            postServiceImpl.createPost(createdRequest);
+        });
+    }
+
+    @Test
     void testAddPhotoById() {
         List<MultipartFile> files = new ArrayList<>();
         files.add(new MockMultipartFile("file1.jpg", new byte[]{1, 2, 3}));
@@ -311,6 +320,7 @@ class PostServiceImplTest {
         verify(s3FileService, times(1)).deleteFileFromS3Bucket("photo2.jpg");
         verify(postRepository, times(1)).save(post);
     }
+
 
 
 }

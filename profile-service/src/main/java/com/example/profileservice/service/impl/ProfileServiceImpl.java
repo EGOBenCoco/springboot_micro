@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class ProfileServiceImpl implements ProfileService {
 
     ProfileRepository profileRepository;
@@ -53,7 +54,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     }
 
-    @Transactional
+
     public void createProfile(ProfileCreatedRequest createdRequest) {
         String nickname = getTokenAttribute("preferred_username");
         String auth_id = getTokenAttribute("sub");
@@ -66,29 +67,29 @@ public class ProfileServiceImpl implements ProfileService {
         profileRepository.save(profile);
     }
 
-    @Transactional
+
     public ProfileResponce getById(int id) {
         Profile profile = profileRepository.findById(id).orElseThrow(() -> new CustomException("Profile not found", HttpStatus.NOT_FOUND));
         return modelMapper.map(profile, ProfileResponce.class);
     }
 
-    @Transactional
+
     @Override
     public ProfileResponce getByNickname(String nickname) {
         Profile profile = profileRepository.findByNickname(nickname).orElseThrow(() -> new CustomException("Profile not found", HttpStatus.NOT_FOUND));
         return modelMapper.map(profile, ProfileResponce.class);
     }
 
-    public void updateUser(ProfileUpdateRequest updateRequest) {
+    public void updateProfile(ProfileUpdateRequest updateRequest) {
         String auth_id = getTokenAttribute("sub");
-        profileRepository.findProfileByAuth_id(auth_id).ifPresentOrElse(consumer ->
+        profileRepository.findProfileByAuth_id(auth_id).ifPresentOrElse(profile ->
         {
-            consumer.setNickname(updateRequest.getNickname());
-            consumer.setBio(updateRequest.getBio());
+            profile.setNickname(updateRequest.getNickname());
+            profile.setBio(updateRequest.getBio());
             UserRepresentation userRep = mapUserRep(updateRequest);
             keycloak.realm(realm).users().get(auth_id).update(userRep);
-            profileRepository.save(consumer);
-            profileProducerMQ.sendMessage(consumer.getId(),consumer.getNickname());
+            profileRepository.save(profile);
+            profileProducerMQ.sendMessage(profile.getId(),profile.getNickname());
         }, () -> {
             throw new CustomException("Profile not found", HttpStatus.NOT_FOUND);
         });

@@ -76,23 +76,6 @@ public class SubscriberServiceImpl implements SubscriberService {
         return new PageImpl<>(subscriberResponces, subscriberPage.getPageable(), subscriberPage.getTotalElements());
     }
 
-
-
-/*    public List<SubscriberResponce> getSubscriberSubscriptions(int subscriberId) {
-        Optional<Subscriber> subscriberOptional = subscriberRepository.findById(subscriberId);
-
-        if (subscriberOptional.isPresent()) {
-            return subscriberOptional.get().getProfileId().stream()
-                    .map(profileId -> {
-                        ProfileResponce profile = client.getById(profileId);
-                        return new SubscriberResponce(subscriberId, profile.getId(), profile.getNickname());
-                    })
-                    .collect(Collectors.toList());
-        } else {
-            throw new CustomException("Not found",HttpStatus.NOT_FOUND);
-        }
-    }*/
-
     public void unsubscribe(int subscriberId, int profileId) {
         subscriberRepository.deleteById(subscriberId);
         producerSubscriber.publishCountSubscriber(profileId, false);

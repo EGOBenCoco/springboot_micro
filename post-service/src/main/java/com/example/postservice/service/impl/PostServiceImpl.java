@@ -2,7 +2,6 @@ package com.example.postservice.service.impl;
 
 import com.example.plannerentity.dto.request.PostCreatedRequest;
 import com.example.plannerentity.dto.request.PostUpdateRequest;
-import com.example.plannerentity.dto.responce.PostResponce;
 import com.example.plannerentity.dto.responce.PostSubscriberMessage;
 import com.example.plannerentity.dto.responce.ProfileResponce;
 import com.example.plannerentity.enums.Category;
@@ -17,7 +16,6 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -25,14 +23,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 @RequiredArgsConstructor
+@Transactional
 public class PostServiceImpl implements PostService {
 
     PostRepository postRepository;
@@ -54,11 +53,9 @@ public class PostServiceImpl implements PostService {
     public void createPost(PostCreatedRequest createdRequest) {
         String nickname = getTokenAttribute("preferred_username");
         ProfileResponce profile = profileClient.getByNickname(nickname);
-        if(profile.getAuth_id() == null){
-            throw new CustomException("Something wrong with your profile. Check",HttpStatus.NOT_FOUND);
-        }
+
         Post post = modelMapper.map(createdRequest,Post.class);
-        post.setAccountId(profile.getId());
+        post.setProfileId(profile.getId());
         post.setAuthor(profile.getNickname());
         postRepository.save(post);
         PostSubscriberMessage message = new PostSubscriberMessage
@@ -81,8 +78,6 @@ public class PostServiceImpl implements PostService {
             throw new CustomException("Posts not found", HttpStatus.NOT_FOUND);
         }
         return postPage;
-/*        Type postResponceListType = new TypeToken<Page<PostResponce>>() {}.getType();
-        return modelMapper.map(postPage,postResponceListType);*/
     }
 
     @Override
@@ -92,8 +87,6 @@ public class PostServiceImpl implements PostService {
             throw new CustomException("Posts not found", HttpStatus.NOT_FOUND);
         }
         return postPage;
-        /*Type postResponceListType = new TypeToken<Page<PostResponce>>() {}.getType();
-        return modelMapper.map(postPage,postResponceListType);*/
     }
     public Post getById(int id) {
         return postRepository.findById(id).orElseThrow(()-> new CustomException("Post not found", HttpStatus.NOT_FOUND));
@@ -105,8 +98,6 @@ public class PostServiceImpl implements PostService {
             throw new CustomException("Posts not found", HttpStatus.NOT_FOUND);
         }
         return postPage;
-/*        Type postResponceListType = new TypeToken<Page<PostResponce>>() {}.getType();
-        return modelMapper.map(postPage,postResponceListType);*/
     }
 
 

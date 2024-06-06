@@ -29,6 +29,13 @@ spec:
                   name: {{ .Values.global.configMapName }}
                   key: CONFIG_SERVER_URL
           {{- end }}
+          {{- if .Values.config_enabled }}
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: env-git
+                  key: password
+          {{- end}}
           {{- if .Values.postgresql_enabled }}
             - name: DB_HOST
               valueFrom:

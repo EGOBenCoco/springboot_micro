@@ -1,4 +1,4 @@
-INSERT INTO Post (account_Id, name, content, author, category, created_at, updated_at)
+INSERT INTO Post (profile_Id, name, content, author, category, created_at, updated_at)
 VALUES (2, 'Test post', 'Test content', 'Kirill', 'IT', NOW(), NOW());
 
 
